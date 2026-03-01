@@ -302,8 +302,43 @@ main { padding-top: var(--nav-h); }
   background: #34d39910;
 }
 
-/* Glass-box visual */
-.hero-right { display: flex; justify-content: center; }
+/* Hero image */
+.hero-right { display: flex; justify-content: center; align-items: flex-start; }
+
+.hero-img-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 0;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(129,140,248,.1);
+  transition: border-color .2s, box-shadow .2s, transform .2s;
+  display: flex;
+  flex-direction: column;
+  max-width: 420px;
+  width: 100%;
+}
+.hero-img-btn:hover {
+  border-color: var(--pri);
+  box-shadow: 0 0 48px rgba(129,140,248,.22);
+  transform: translateY(-3px);
+}
+.hero-img {
+  width: 100%;
+  display: block;
+  border-radius: 15px 15px 0 0;
+}
+.hero-img-cap {
+  background: var(--bg2);
+  color: var(--pri);
+  font-size: .78rem;
+  font-weight: 600;
+  padding: 10px 16px;
+  text-align: center;
+  border-radius: 0 0 15px 15px;
+  letter-spacing: .02em;
+}
 
 .glass-box {
   background: var(--bg2);
