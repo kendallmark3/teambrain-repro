@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TeamBrain — Intent-Driven Engineering</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Navigation ──────────────────────────────────────────────────────── -->
+  <nav class="nav" id="nav">
+    <div class="nav-brand">
+      <div class="nav-logo">TB</div>
+      <span class="nav-name">TeamBrain</span>
+    </div>
+    <ul class="nav-links">
+      <li><button class="nav-link active" data-page="home">Home</button></li>
+      <li><button class="nav-link" data-page="about">About</button></li>
+      <li><button class="nav-link" data-page="principles">Principles</button></li>
+      <li><button class="nav-link" data-page="framework">Framework</button></li>
+      <li><button class="nav-link" data-page="examples">Examples</button></li>
+      <li><button class="nav-link" data-page="templates">Templates</button></li>
+      <li><button class="nav-link" data-page="usecases">Use Cases</button></li>
+      <li><button class="nav-link" data-page="philosophy">Philosophy</button></li>
+      <li><button class="nav-link" data-page="getstarted">Get Started</button></li>
+      <li><button class="nav-link nav-link--cta" data-page="contact">Contact</button></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ── Mobile Drawer ───────────────────────────────────────────────────── -->
+  <div class="drawer" id="drawer">
+    <button class="drawer-link" data-page="home">Home</button>
+    <button class="drawer-link" data-page="about">About</button>
+    <button class="drawer-link" data-page="principles">Principles</button>
+    <button class="drawer-link" data-page="framework">Framework</button>
+    <button class="drawer-link" data-page="examples">Examples</button>
+    <button class="drawer-link" data-page="templates">Templates</button>
+    <button class="drawer-link" data-page="usecases">Use Cases</button>
+    <button class="drawer-link" data-page="philosophy">Philosophy</button>
+    <button class="drawer-link" data-page="getstarted">Get Started</button>
+    <button class="drawer-link" data-page="contact">Contact</button>
+  </div>
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+
+  <!-- ── Pages ───────────────────────────────────────────────────────────── -->
+  <main class="main">
+
+    <!-- ═══════════════════════════════════════════════════════════ HOME ═══ -->
+    <section class="page" id="page-home">
+
+      <!-- Hero -->
+      <div class="home-layout">
+        <div class="hero-text">
+          <div class="badge">Structured Reasoning Framework</div>
+          <h1 class="hero-title">
+            <span id="typewriter"></span><span class="cursor">|</span>
+          </h1>
+          <p class="hero-sub">
+            Turns AI into a virtual senior engineering team — for enterprise decisions that are costly to reverse, where constraints are real and judgment matters more than novelty.
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" data-page="principles">Explore Principles</button>
+            <button class="btn btn-ghost" data-page="framework">See the Commands</button>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-num" data-target="6">0</span>
+              <span class="stat-label">Core Principles</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-num" data-target="3">0</span>
+              <span class="stat-label">Claude Commands</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-num" data-target="0">0</span>
+              <span class="stat-label">Magic Shortcuts</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="orbit-wrap">
+          <div class="orbit-center">TeamBrain</div>
+          <div class="orbit-ring ring-1">
+            <div class="orbit-dot" style="--i:0"><span>Reason</span></div>
+            <div class="orbit-dot" style="--i:1"><span>Assume</span></div>
+            <div class="orbit-dot" style="--i:2"><span>Tradeoff</span></div>
+            <div class="orbit-dot" style="--i:3"><span>Risk</span></div>
+            <div class="orbit-dot" style="--i:4"><span>Facts</span></div>
+            <div class="orbit-dot" style="--i:5"><span>Clarity</span></div>
+          </div>
+          <div class="orbit-ring ring-2"></div>
+          <div class="orbit-ring ring-3"></div>
+        </div>
+      </div>
+
+      <!-- The Problem -->
+      <div class="home-section">
+        <div class="home-section-inner">
+          <div class="section-header reveal">
+            <div class="badge">The Problem</div>
+            <h2>Most AI Tools Jump to Solutions</h2>
+            <p>That's fine for simple tasks. For enterprise decisions it's dangerous.</p>
+          </div>
+
+          <div class="compare-grid">
+            <div class="compare-card compare-card--bad reveal" style="--d:.05s">
+              <div class="compare-label compare-label--bad">Without TeamBrain</div>
+              <ul class="compare-list">
+                <li>🔴 AI generates code before understanding the problem</li>
+                <li>🔴 Assumptions are hidden inside the output</li>
+                <li>🔴 Tradeoffs are never named — only one option presented</li>
+                <li>🔴 Risks surface in production, not planning</li>
+                <li>🔴 Requirements invented to fill gaps in the prompt</li>
+                <li>🔴 Different team members get different advice from the same AI</li>
+                <li>🔴 No audit trail for why decisions were made</li>
+              </ul>
+            </div>
+            <div class="compare-card compare-card--good reveal" style="--d:.1s">
+              <div class="compare-label compare-label--good">With TeamBrain</div>
+              <ul class="compare-list">
+                <li>✅ Problem restated before any solution is proposed</li>
+                <li>✅ Every assumption is explicit and challengeable</li>
+                <li>✅ At least two approaches with named tradeoffs</li>
+                <li>✅ Top risks flagged before a line is written</li>
+                <li>✅ Unclear requirements trigger a stop, not an invention</li>
+                <li>✅ Intent files committed to git — every session inherits them</li>
+                <li>✅ Decisions traced back to declared constraints</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Built For -->
+      <div class="home-section home-section--alt">
+        <div class="home-section-inner">
+          <div class="section-header reveal">
+            <div class="badge">Built For</div>
+            <h2>Environments Where Decisions Are Costly</h2>
+            <p>Not greenfield prototypes. The places where getting it wrong has real consequences.</p>
+          </div>
+          <div class="builtfor-grid">
+            <div class="builtfor-item reveal" style="--d:.05s">
+              <div class="builtfor-icon">🏛️</div>
+              <h4>Large Organizations</h4>
+              <p>Complex org structures, multiple stakeholders, cross-team dependencies</p>
+            </div>
+            <div class="builtfor-item reveal" style="--d:.1s">
+              <div class="builtfor-icon">⚖️</div>
+              <h4>Regulated Environments</h4>
+              <p>Finance, healthcare, government — where compliance is a real constraint, not a checkbox</p>
+            </div>
+            <div class="builtfor-item reveal" style="--d:.15s">
+              <div class="builtfor-icon">🔗</div>
+              <h4>Complex Integration</h4>
+              <p>Legacy systems, third-party APIs, multi-cloud — where invisible coupling kills you</p>
+            </div>
+            <div class="builtfor-item reveal" style="--d:.2s">
+              <div class="builtfor-icon">📋</div>
+              <h4>Consulting & Delivery</h4>
+              <p>Client-facing decisions that need a paper trail and defensible reasoning</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ PRINCIPLES ═══ -->
+    <section class="page" id="page-principles">
+      <div class="page-inner">
+
+        <header class="section-header reveal">
+          <div class="badge">Non-Negotiables</div>
+          <h2>6 Core Principles</h2>
+          <p>Every decision runs through all six. Skip one and you've built on a hidden assumption.</p>
+        </header>
+
+        <div class="principles-grid">
+          <article class="p-card reveal" style="--d:.05s">
+            <div class="p-num">01</div>
+            <div class="p-icon">🧠</div>
+            <h3>Reasoning Before Solutions</h3>
+            <p>Never jump to an answer. Lay out the thinking first — what's the actual problem, what are the constraints, what does the solution space look like before you pick one path.</p>
+            <div class="p-example">
+              <span class="p-example-label">In practice:</span>
+              Before proposing a caching strategy, restate why the system is slow and whether caching actually addresses the root cause.
+            </div>
+            <div class="p-bar"><div class="p-fill"></div></div>
+          </article>
+
+          <article class="p-card reveal" style="--d:.1s">
+            <div class="p-num">02</div>
+            <div class="p-icon">📋</div>
+            <h3>Explicit Assumptions</h3>
+            <p>Every assumption must be named. Hidden assumptions are hidden failures waiting for the right stress condition. If you're taking something for granted, say it out loud so it can be challenged.</p>
+            <div class="p-example">
+              <span class="p-example-label">In practice:</span>
+              "We assume app teams deploy weekly and can absorb a 5-minute maintenance window" — said before designing the migration plan.
+            </div>
+            <div class="p-bar"><div class="p-fill"></div></div>
+          </article>
+
+          <article class="p-card reveal" style="--d:.15s">
+            <div class="p-num">03</div>
+            <div class="p-icon">⚖️</div>
+            <h3>Clear Tradeoffs</h3>
+            <p>Every decision has a cost. Name what you're gaining and what you're giving up. There are no free lunches in system design — the question is whether the tradeoff is worth it for your context.</p>
+            <div class="p-example">
+              <span class="p-example-label">In practice:</span>
+              "Event-driven gains loose coupling but loses transaction guarantees. We choose events because coupling is our bigger risk."
+            </div>
+            <div class="p-bar"><div class="p-fill"></div></div>
+          </article>
+
+          <article class="p-card reveal" style="--d:.2s">
+            <div class="p-num">04</div>
+            <div class="p-icon">⚠️</div>
+            <h3>Risk Surfaced Early</h3>
+            <p>Flag risks before you build, not after. The cost of surfacing a risk early is a conversation. The cost of discovering it late is a production incident with a post-mortem and an angry SLA review.</p>
+            <div class="p-example">
+              <span class="p-example-label">In practice:</span>
+              "Risk: if the OTEL collector goes down, buffering strategy is undefined. Define before shipping."
+            </div>
+            <div class="p-bar"><div class="p-fill"></div></div>
+          </article>
+
+          <article class="p-card reveal" style="--d:.25s">
+            <div class="p-num">05</div>
+            <div class="p-icon">✅</div>
+            <h3>No Invented Facts</h3>
+            <p>If you don't know, say so. Fabricated confidence is more dangerous than admitted uncertainty. When requirements are ambiguous, stop and ask — do not fill the gap with plausible-sounding fiction.</p>
+            <div class="p-example">
+              <span class="p-example-label">In practice:</span>
+              "I don't have enough information about the retention requirements to recommend a storage tier. What are the compliance constraints?"
+            </div>
+            <div class="p-bar"><div class="p-fill"></div></div>
+          </article>
+
+          <article class="p-card reveal" style="--d:.3s">
+            <div class="p-num">06</div>
+            <div class="p-icon">🔍</div>
+            <h3>No Hidden Requirements</h3>
+            <p>Make every constraint visible. Security, compliance, org structure, budget, team capability — if it affects the decision, it belongs in the room. Silent constraints are the most dangerous ones.</p>
+            <div class="p-example">
+              <span class="p-example-label">In practice:</span>
+              "Unstated constraint: team has no Kubernetes experience. The proposed solution requires it. This changes the recommendation."
+            </div>
+            <div class="p-bar"><div class="p-fill"></div></div>
+          </article>
+        </div>
+
+        <!-- Intent Check Preview -->
+        <div class="intent-preview reveal" style="--d:.1s">
+          <div class="intent-preview-header">
+            <div class="terminal-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <span class="intent-preview-title">$ /intent-check</span>
+          </div>
+          <div class="intent-preview-body">
+            <p class="intent-preview-desc">Run this before every new feature. Answer all 7. If any answer is "I don't know" — stop and ask.</p>
+            <ol class="intent-questions">
+              <li><strong>What is the actual problem?</strong> — Not what was asked. What problem does it solve?</li>
+              <li><strong>Who is affected?</strong> — Which users, systems, or services does this touch?</li>
+              <li><strong>What are you assuming?</strong> — List at least two. If you can't, think harder.</li>
+              <li><strong>What are the edge cases?</strong> — Empty input, max load, network failure, bad auth?</li>
+              <li><strong>What could go wrong?</strong> — Name the top 3 risks before you start.</li>
+              <li><strong>What is NOT in scope?</strong> — Be explicit about what this change does not do.</li>
+              <li><strong>Is there a simpler solution?</strong> — If yes — why aren't you doing that instead?</li>
+            </ol>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════ FRAMEWORK ═══ -->
+    <section class="page" id="page-framework">
+      <div class="page-inner">
+
+        <header class="section-header reveal">
+          <div class="badge">Commands & Workflow</div>
+          <h2>The Framework in Practice</h2>
+          <p>Three Claude commands. One workflow. Committed to git so every session inherits it.</p>
+        </header>
+
+        <!-- Workflow Banner -->
+        <div class="workflow-banner reveal">
+          <div class="wf-step">
+            <div class="wf-icon">💡</div>
+            <div class="wf-label">New Feature</div>
+          </div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-step wf-step--cmd">
+            <div class="wf-icon">🔍</div>
+            <div class="wf-label">/intent-check</div>
+          </div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-step">
+            <div class="wf-icon">⌨️</div>
+            <div class="wf-label">Implement</div>
+          </div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-step wf-step--cmd">
+            <div class="wf-icon">📝</div>
+            <div class="wf-label">/review</div>
+          </div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-step wf-step--success">
+            <div class="wf-icon">🚀</div>
+            <div class="wf-label">PR</div>
+          </div>
+        </div>
+
+        <div class="workflow-banner reveal" style="--d:.1s">
+          <div class="wf-step">
+            <div class="wf-icon">🏗️</div>
+            <div class="wf-label">Arch Change</div>
+          </div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-step wf-step--cmd">
+            <div class="wf-icon">🔎</div>
+            <div class="wf-label">/arch-review</div>
+          </div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-step">
+            <div class="wf-icon">🤝</div>
+            <div class="wf-label">Team Alignment</div>
+          </div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-step wf-step--success">
+            <div class="wf-icon">✅</div>
+            <div class="wf-label">Implement</div>
+          </div>
+        </div>
+
+        <!-- Commands -->
+        <div class="cmd-grid">
+
+          <div class="cmd-card reveal" style="--d:.05s">
+            <div class="cmd-header">
+              <div class="cmd-badge">/intent-check</div>
+              <div class="cmd-when">Run before every new feature</div>
+            </div>
+            <p class="cmd-desc">Forces you to articulate the problem, name assumptions, and flag risks before a single line of code is written. The goal is not to fill out a form — it's to surface what you haven't thought about yet.</p>
+            <div class="cmd-questions">
+              <div class="cmd-q"><span class="cmd-q-num">1</span> What is the actual problem?</div>
+              <div class="cmd-q"><span class="cmd-q-num">2</span> Who is affected?</div>
+              <div class="cmd-q"><span class="cmd-q-num">3</span> What are you assuming?</div>
+              <div class="cmd-q"><span class="cmd-q-num">4</span> What are the edge cases?</div>
+              <div class="cmd-q"><span class="cmd-q-num">5</span> What could go wrong?</div>
+              <div class="cmd-q"><span class="cmd-q-num">6</span> What is NOT in scope?</div>
+              <div class="cmd-q"><span class="cmd-q-num">7</span> Is there a simpler solution?</div>
+            </div>
+            <div class="cmd-rule">If any answer is "I don't know" — stop and ask the team.</div>
+          </div>
+
+          <div class="cmd-card reveal" style="--d:.1s">
+            <div class="cmd-header">
+              <div class="cmd-badge cmd-badge--green">/review</div>
+              <div class="cmd-when">Run before opening any PR</div>
+            </div>
+            <p class="cmd-desc">A structured PR readiness check. Every PR must be able to answer these questions or it's not ready to merge. Prevents "just ship it and see" culture in production systems.</p>
+            <div class="cmd-questions">
+              <div class="cmd-q"><span class="cmd-q-num">→</span> What problem does this solve?</div>
+              <div class="cmd-q"><span class="cmd-q-num">→</span> What assumptions does it make?</div>
+              <div class="cmd-q"><span class="cmd-q-num">→</span> What did you consider and reject?</div>
+              <div class="cmd-q"><span class="cmd-q-num">→</span> What are the edge cases and how are they handled?</div>
+              <div class="cmd-q"><span class="cmd-q-num">→</span> What monitoring or observability does this add?</div>
+            </div>
+            <div class="cmd-rule">PRs that cannot answer these are not ready for review.</div>
+          </div>
+
+          <div class="cmd-card reveal" style="--d:.15s">
+            <div class="cmd-header">
+              <div class="cmd-badge cmd-badge--orange">/arch-review</div>
+              <div class="cmd-when">Run before any architectural change</div>
+            </div>
+            <p class="cmd-desc">Triggers a structured architecture review before proposing any new pattern, data model, or service boundary. Ensures changes are justified by intent, not convenience.</p>
+            <div class="cmd-questions">
+              <div class="cmd-q"><span class="cmd-q-num">→</span> What is the current state and why is it insufficient?</div>
+              <div class="cmd-q"><span class="cmd-q-num">→</span> What is the proposed change with explicit tradeoffs?</div>
+              <div class="cmd-q"><span class="cmd-q-num">→</span> What alternative was considered and why rejected?</div>
+              <div class="cmd-q"><span class="cmd-q-num">→</span> What breaks or needs migration?</div>
+              <div class="cmd-q"><span class="cmd-q-num">→</span> Does this change require intent file updates?</div>
+            </div>
+            <div class="cmd-rule">Architecture changes without this review are blocked from merge.</div>
+          </div>
+
+        </div>
+
+        <!-- Intent Files -->
+        <div class="intent-files reveal" style="--d:.1s">
+          <h3 class="intent-files-title">The Intent Files</h3>
+          <p class="intent-files-desc">These two files are the foundation. Everything else — code, commands, CI — enforces them.</p>
+          <div class="intent-files-grid">
+            <div class="intent-file">
+              <div class="intent-file-path">📄 /intent/architecture.intent.md</div>
+              <ul>
+                <li>One sentence: what the system exists to do</li>
+                <li>Primary tradeoff: what you prioritize over what</li>
+                <li>Explicit list of things you do NOT do</li>
+                <li>Named owner and trigger conditions for revisit</li>
+              </ul>
+              <div class="intent-file-rule">If this file is missing — work stops. Resolve intent before building.</div>
+            </div>
+            <div class="intent-file">
+              <div class="intent-file-path">📄 /intent/constraints.md</div>
+              <ul>
+                <li>Every constraint traces back to declared intent</li>
+                <li>Architectural, deployment, automation constraints</li>
+                <li>Constraint violation protocol (explicit exceptions only)</li>
+                <li>If a constraint can't be justified by intent — remove it</li>
+              </ul>
+              <div class="intent-file-rule">Constraints without justification are noise. Only keep what traces to intent.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ USE CASES ═══ -->
+    <section class="page" id="page-usecases">
+      <div class="page-inner">
+
+        <header class="section-header reveal">
+          <div class="badge">Where It Works</div>
+          <h2>Real Use Cases</h2>
+          <p>TeamBrain was built for decisions where being wrong is expensive and constraints are real.</p>
+        </header>
+
+        <div class="usecases-grid">
+
+          <article class="uc-card reveal" style="--d:.05s">
+            <div class="uc-top">
+              <div class="uc-icon">🏗️</div>
+              <div class="uc-tags">
+                <span>Microservices</span><span>Monolith</span><span>Event-Driven</span>
+              </div>
+            </div>
+            <h3>Architecture Reviews</h3>
+            <p>Evaluate system designs against real constraints — not theoretical ideals. Surface hidden coupling, single points of failure, and unexamined assumptions before the system is built and those assumptions are calcified into production.</p>
+            <div class="uc-questions">
+              <div class="uc-q-label">Key questions it forces:</div>
+              <ul>
+                <li>What does this system exist to do — in one sentence?</li>
+                <li>What do we prioritize when forced to choose?</li>
+                <li>What are we explicitly not doing?</li>
+                <li>What breaks when this service goes down?</li>
+              </ul>
+            </div>
+            <div class="uc-footer">
+              <span class="uc-who">👤 Architects · Tech Leads</span>
+            </div>
+          </article>
+
+          <article class="uc-card reveal" style="--d:.1s">
+            <div class="uc-top">
+              <div class="uc-icon">☁️</div>
+              <div class="uc-tags">
+                <span>AWS</span><span>GCP</span><span>Azure</span><span>On-Prem</span>
+              </div>
+            </div>
+            <h3>Cloud & Platform Decisions</h3>
+            <p>Choose infrastructure patterns that match your actual constraints — not vendor defaults or conference talk recommendations. Managed vs. self-hosted, multi-cloud vs. single, serverless vs. containers — with explicit tradeoff documentation that survives team turnover.</p>
+            <div class="uc-questions">
+              <div class="uc-q-label">Key questions it forces:</div>
+              <ul>
+                <li>What cloud pattern aligns with our declared intent?</li>
+                <li>Which deployment models violate our constraints?</li>
+                <li>What CI/CD behaviors must be explicitly blocked?</li>
+                <li>Who approves infrastructure changes and when?</li>
+              </ul>
+            </div>
+            <div class="uc-footer">
+              <span class="uc-who">👤 Platform Eng · SRE · DevOps Leads</span>
+            </div>
+          </article>
+
+          <article class="uc-card reveal" style="--d:.15s">
+            <div class="uc-top">
+              <div class="uc-icon">🚀</div>
+              <div class="uc-tags">
+                <span>CI/CD</span><span>GitOps</span><span>SRE</span><span>Observability</span>
+              </div>
+            </div>
+            <h3>DevOps & Delivery Models</h3>
+            <p>Design pipelines and delivery processes that reflect your team's real capabilities — not industry benchmarks built by teams with 10× your headcount, budget, and institutional knowledge. A delivery model that works for Stripe doesn't automatically work for a 5-person platform team.</p>
+            <div class="uc-questions">
+              <div class="uc-q-label">Key questions it forces:</div>
+              <ul>
+                <li>What does our team actually have the skill to maintain?</li>
+                <li>What is the rollback strategy for every deployment?</li>
+                <li>What breaks if the CI pipeline is unavailable for 4 hours?</li>
+                <li>Who owns the on-call rotation and what are their limits?</li>
+              </ul>
+            </div>
+            <div class="uc-footer">
+              <span class="uc-who">👤 DevOps Leads · Eng Managers</span>
+            </div>
+          </article>
+
+          <article class="uc-card reveal" style="--d:.2s">
+            <div class="uc-top">
+              <div class="uc-icon">🔗</div>
+              <div class="uc-tags">
+                <span>APIs</span><span>Events</span><span>ETL</span><span>Legacy</span>
+              </div>
+            </div>
+            <h3>Integration Strategy</h3>
+            <p>Connect systems without creating invisible coupling or cascading failure modes. Define integration contracts, failure behaviors, retry strategies, and data ownership before connecting anything — not after the first production outage reveals the assumptions you made.</p>
+            <div class="uc-questions">
+              <div class="uc-q-label">Key questions it forces:</div>
+              <ul>
+                <li>What is the contract between these systems?</li>
+                <li>What happens when the upstream is unavailable?</li>
+                <li>Who owns the data in transit and at rest?</li>
+                <li>What does "eventual consistency" mean for this use case?</li>
+              </ul>
+            </div>
+            <div class="uc-footer">
+              <span class="uc-who">👤 Senior Engineers · Integration Architects</span>
+            </div>
+          </article>
+
+          <article class="uc-card reveal" style="--d:.25s">
+            <div class="uc-top">
+              <div class="uc-icon">📊</div>
+              <div class="uc-tags">
+                <span>Stakeholders</span><span>Risk</span><span>ROI</span><span>Compliance</span>
+              </div>
+            </div>
+            <h3>Executive Communication</h3>
+            <p>Translate technical decisions into business language that executives can actually evaluate. Explain why the technically correct answer may not be the right business decision — and what the real options cost in time, risk, and opportunity, not just in dollars.</p>
+            <div class="uc-questions">
+              <div class="uc-q-label">Key questions it forces:</div>
+              <ul>
+                <li>What business outcome does this technical choice affect?</li>
+                <li>What are we trading off in terms a CFO would recognize?</li>
+                <li>What is the cost of the approach we're not taking?</li>
+                <li>What decision do we need from leadership, and by when?</li>
+              </ul>
+            </div>
+            <div class="uc-footer">
+              <span class="uc-who">👤 Consultants · CTO Staff · Eng Managers</span>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════ PHILOSOPHY ═══ -->
+    <section class="page" id="page-philosophy">
+      <div class="page-inner">
+
+        <div class="philo-quote-wrap reveal">
+          <div class="badge">Core Belief</div>
+          <blockquote class="philo-quote">
+            "Good systems come from good judgment —<br>not faster answers."
+          </blockquote>
+          <cite>— TeamBrain Core Philosophy</cite>
+        </div>
+
+        <!-- What enterprise teams face -->
+        <div class="philo-challenges reveal" style="--d:.05s">
+          <h3 class="philo-section-title">What Enterprise Teams Actually Face</h3>
+          <div class="challenges-grid">
+            <div class="challenge-item">
+              <div class="challenge-icon">🏚️</div>
+              <h4>Decisions Are Costly to Reverse</h4>
+              <p>A wrong architecture choice doesn't just mean refactoring. It means data migrations, re-training, new contracts, and a year of technical debt.</p>
+            </div>
+            <div class="challenge-item">
+              <div class="challenge-icon">🔒</div>
+              <h4>Constraints Are Real</h4>
+              <p>Security policies, compliance requirements, budget limits, team skill gaps — these aren't excuses. They're the actual shape of the problem.</p>
+            </div>
+            <div class="challenge-item">
+              <div class="challenge-icon">🌫️</div>
+              <h4>Clarity Trumps Cleverness</h4>
+              <p>The elegant solution nobody understands is worse than the boring solution everyone can maintain. Cleverness is a liability in production.</p>
+            </div>
+            <div class="challenge-item">
+              <div class="challenge-icon">🎯</div>
+              <h4>Judgment Matters More Than Novelty</h4>
+              <p>The right answer for your team, your org, and your constraints is rarely the same as the answer in the conference talk or the blog post.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Is / Isn't / Who -->
+        <div class="philo-grid">
+          <div class="philo-card reveal" style="--d:.1s">
+            <div class="philo-icon">✅</div>
+            <h3>What TeamBrain Is</h3>
+            <ul>
+              <li>A thinking amplifier, not a shortcut</li>
+              <li>A virtual senior engineering team</li>
+              <li>A structured reasoning process</li>
+              <li>A constraint-aware decision framework</li>
+              <li>An audit trail for why decisions were made</li>
+              <li>A team-wide shared operating standard</li>
+            </ul>
+          </div>
+          <div class="philo-card philo-card--contrast reveal" style="--d:.15s">
+            <div class="philo-icon">🚫</div>
+            <h3>What TeamBrain Is Not</h3>
+            <ul>
+              <li>A code generator</li>
+              <li>A chatbot persona or role-play</li>
+              <li>A magic problem solver</li>
+              <li>A replacement for engineers</li>
+              <li>A faster way to get to the same answer</li>
+              <li>An excuse to skip the hard conversations</li>
+            </ul>
+          </div>
+          <div class="philo-card reveal" style="--d:.2s">
+            <div class="philo-icon">🎯</div>
+            <h3>Who It's Built For</h3>
+            <ul>
+              <li>Senior engineers &amp; tech leads</li>
+              <li>Architects &amp; platform engineers</li>
+              <li>Consultants in client-facing roles</li>
+              <li>Engineering managers owning delivery</li>
+              <li>Platform &amp; DevOps leaders</li>
+              <li>Anyone making decisions that are costly to reverse</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="philo-cta reveal" style="--d:.25s">
+          <p>Judgment matters more than novelty. Clarity trumps cleverness.</p>
+          <div class="philo-cta-actions">
+            <button class="btn btn-primary" data-page="getstarted">Get Started</button>
+            <button class="btn btn-ghost" data-page="principles">Read the Principles</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════ GET STARTED ═══ -->
+    <section class="page" id="page-getstarted">
+      <div class="page-inner">
+
+        <header class="section-header reveal">
+          <div class="badge">Adopt TeamBrain</div>
+          <h2>Get Started in 3 Steps</h2>
+          <p>For new teams and new team members. Clone the repo, run Claude, inherit the standards.</p>
+        </header>
+
+        <!-- Steps -->
+        <div class="gs-steps">
+          <div class="gs-step reveal" style="--d:.05s">
+            <div class="gs-step-num">01</div>
+            <div class="gs-step-body">
+              <h3>Clone the Repo &amp; Open Claude</h3>
+              <p>The <code>CLAUDE.md</code> file in the project root loads automatically into every Claude Code session. Every developer who opens this repo gets the same AI operating standards — no manual setup, no pasting prompts, no tribal knowledge.</p>
+              <div class="gs-code">
+                <div class="gs-code-line"><span class="gs-code-cmd">$</span> git clone [your-repo]</div>
+                <div class="gs-code-line"><span class="gs-code-cmd">$</span> cd your-repo</div>
+                <div class="gs-code-line"><span class="gs-code-cmd">$</span> claude  <span class="gs-code-comment"># CLAUDE.md auto-loads</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="gs-step reveal" style="--d:.1s">
+            <div class="gs-step-num">02</div>
+            <div class="gs-step-body">
+              <h3>Declare Intent Before Writing Code</h3>
+              <p>Fill in <code>/intent/architecture.intent.md</code> — one sentence on why the system exists, the primary tradeoff, and what you explicitly don't do. Then derive constraints in <code>/intent/constraints.md</code>. These files gate CI. If they're missing, PRs don't merge.</p>
+              <div class="gs-checklist">
+                <label class="gs-check"><input type="checkbox" /><span>System purpose — one sentence, no buzzwords</span></label>
+                <label class="gs-check"><input type="checkbox" /><span>Primary tradeoff — what you prioritize over what</span></label>
+                <label class="gs-check"><input type="checkbox" /><span>Explicit exclusions — what you do not do</span></label>
+                <label class="gs-check"><input type="checkbox" /><span>Named owner and trigger conditions</span></label>
+                <label class="gs-check"><input type="checkbox" /><span>Constraints derived from intent (not from conventions)</span></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="gs-step reveal" style="--d:.15s">
+            <div class="gs-step-num">03</div>
+            <div class="gs-step-body">
+              <h3>Run the Commands. Every Time.</h3>
+              <p>The three commands are not optional ceremonies — they're the mechanism that makes intent enforceable. <code>/intent-check</code> before features. <code>/review</code> before PRs. <code>/arch-review</code> before architecture changes. The team runs them; the process enforces them.</p>
+              <div class="gs-commands">
+                <div class="gs-command">
+                  <span class="gs-command-name">/intent-check</span>
+                  <span class="gs-command-when">→ Before any new feature</span>
+                </div>
+                <div class="gs-command">
+                  <span class="gs-command-name">/review</span>
+                  <span class="gs-command-when">→ Before opening any PR</span>
+                </div>
+                <div class="gs-command">
+                  <span class="gs-command-name">/arch-review</span>
+                  <span class="gs-command-when">→ Before any architecture change</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Team Roles -->
+        <div class="gs-roles reveal" style="--d:.1s">
+          <h3 class="gs-roles-title">Who Does What</h3>
+          <div class="gs-roles-grid">
+            <div class="gs-role">
+              <div class="gs-role-who">Tech Lead / Architect</div>
+              <ul>
+                <li>Owns <code>architecture.intent.md</code></li>
+                <li>Signs off on constraint violations</li>
+                <li>Triggers intent review when conditions are met</li>
+                <li>Approves changes to the system prompt</li>
+              </ul>
+            </div>
+            <div class="gs-role">
+              <div class="gs-role-who">Engineers</div>
+              <ul>
+                <li>Run <code>/intent-check</code> before every feature</li>
+                <li>Run <code>/review</code> before every PR</li>
+                <li>Flag intent violations rather than working around them</li>
+                <li>Add constraints only when traceable to intent</li>
+              </ul>
+            </div>
+            <div class="gs-role">
+              <div class="gs-role-who">Platform / SRE</div>
+              <ul>
+                <li>Enforce CI checks for intent file existence</li>
+                <li>Own <code>constraints.md</code> for infra layer</li>
+                <li>Run <code>/arch-review</code> for infrastructure changes</li>
+                <li>Alert on constraint drift between declared and live state</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sensitive Path Warning -->
+        <div class="gs-sensitive reveal" style="--d:.15s">
+          <div class="gs-sensitive-icon">⚠️</div>
+          <div class="gs-sensitive-body">
+            <h4>Sensitive Path Rules — Stop and Flag Before Proceeding</h4>
+            <p>If your change touches any of the following, raise it with the intent owner before writing code:</p>
+            <div class="gs-sensitive-paths">
+              <span>/auth or authentication logic</span>
+              <span>Payment or billing logic</span>
+              <span>Database migrations or schema changes</span>
+              <span>External API integrations</span>
+              <span>Environment configuration</span>
+              <span>Rate limiting or security middleware</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Final CTA -->
+        <div class="gs-cta reveal" style="--d:.2s">
+          <h3>Ready to Apply the Framework?</h3>
+          <p>Start by reading the principles, then run <code>/intent-check</code> on your next feature before you write a line.</p>
+          <div class="gs-cta-actions">
+            <button class="btn btn-primary" data-page="principles">Read the Principles</button>
+            <button class="btn btn-ghost" data-page="framework">See the Commands</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════════ ABOUT ═══ -->
+    <section class="page" id="page-about">
+      <div class="page-inner">
+
+        <header class="section-header reveal">
+          <div class="badge">The Origin</div>
+          <h2>Why TeamBrain Exists</h2>
+          <p>AI tools got fast. They didn't get better at judgment. TeamBrain was built to close that gap.</p>
+        </header>
+
+        <!-- Origin story -->
+        <div class="about-story reveal">
+          <div class="about-story-text">
+            <h3>The Founding Insight</h3>
+            <p>AI doesn't fail because it's bad at generating code. It fails because it doesn't know what you actually need — and it's too confident to say so.</p>
+            <p>In enterprise environments, that confidence is dangerous. A junior engineer who says "I'm not sure" is safer than an AI that invents a plausible answer to fill the gap. The cost of fabricated confidence isn't a failing test — it's a production incident, a missed compliance requirement, or six weeks of work built on a misunderstood constraint.</p>
+            <p>TeamBrain was built from a simple premise: <strong>reasoning should happen before code</strong>. Not as a formality. Not as documentation. As the actual first step — because the shape of good code depends entirely on the shape of the problem, and the shape of the problem is almost never what it appears to be on the surface.</p>
+          </div>
+          <div class="about-story-quote">
+            <blockquote>"The problem is not that AI is wrong. The problem is that AI is confidently wrong in ways that are hard to detect until it's too late."</blockquote>
+          </div>
+        </div>
+
+        <!-- What makes it different -->
+        <div class="about-diff reveal" style="--d:.1s">
+          <h3 class="about-diff-title">What Makes TeamBrain Different</h3>
+          <div class="about-diff-grid">
+            <div class="about-diff-item">
+              <div class="about-diff-label">Other AI Frameworks</div>
+              <ul>
+                <li>Optimize for output speed</li>
+                <li>Treat prompts as ephemeral chat context</li>
+                <li>Generate code without restating the problem</li>
+                <li>Present one solution as the answer</li>
+                <li>Assume requirements are clear</li>
+                <li>No audit trail for decisions</li>
+              </ul>
+            </div>
+            <div class="about-diff-divider">vs</div>
+            <div class="about-diff-item about-diff-item--good">
+              <div class="about-diff-label about-diff-label--good">TeamBrain</div>
+              <ul>
+                <li>Optimizes for decision quality</li>
+                <li>Version-controls AI operating instructions in git</li>
+                <li>Requires problem restatement before any output</li>
+                <li>Names at least two approaches with explicit tradeoffs</li>
+                <li>Stops and asks when requirements are unclear</li>
+                <li>Every decision traced back to declared intent</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Core beliefs -->
+        <div class="about-beliefs">
+          <h3 class="about-beliefs-title reveal">Core Beliefs</h3>
+          <div class="about-beliefs-grid">
+            <div class="about-belief reveal" style="--d:.05s">
+              <div class="about-belief-num">01</div>
+              <h4>Intent before implementation</h4>
+              <p>You cannot write good code for a problem you haven't understood. The intent layer is not overhead — it's the foundation everything else sits on.</p>
+            </div>
+            <div class="about-belief reveal" style="--d:.1s">
+              <div class="about-belief-num">02</div>
+              <h4>Constraints are infrastructure</h4>
+              <p>Architecture constraints should be version-controlled, reviewable, and enforced by CI — not carried in people's heads or scattered across Confluence pages nobody reads.</p>
+            </div>
+            <div class="about-belief reveal" style="--d:.15s">
+              <div class="about-belief-num">03</div>
+              <h4>AI behavior should be reproducible</h4>
+              <p>If two engineers on the same team get different AI advice for the same decision, the framework has failed. AI operating instructions belong in the repo, not in someone's clipboard.</p>
+            </div>
+            <div class="about-belief reveal" style="--d:.2s">
+              <div class="about-belief-num">04</div>
+              <h4>Uncertainty is information</h4>
+              <p>An AI that says "I don't know, clarify this before I proceed" is more valuable than one that fills the gap with a plausible invention. Acknowledged uncertainty is a decision input.</p>
+            </div>
+            <div class="about-belief reveal" style="--d:.25s">
+              <div class="about-belief-num">05</div>
+              <h4>Violations must be named, not worked around</h4>
+              <p>If a constraint needs to be broken, that should be an explicit, approved, documented exception — not a silent workaround discovered in a post-mortem. Transparency over convenience.</p>
+            </div>
+            <div class="about-belief reveal" style="--d:.3s">
+              <div class="about-belief-num">06</div>
+              <h4>The framework should evolve</h4>
+              <p>Intent is not permanent. When the system's use case changes, the intent file must be revisited. A framework that can't adapt is just technical debt with a nice README.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Open source -->
+        <div class="about-oss reveal" style="--d:.1s">
+          <div class="about-oss-icon">🌐</div>
+          <div class="about-oss-body">
+            <h3>Open Source &amp; Community-Driven</h3>
+            <p>TeamBrain is fully open source. The prompts, templates, intent files, CLAUDE.md structure, and CI checks are all available on GitHub. Teams are encouraged to fork, adapt, and contribute back — the framework improves when real teams use it in real environments.</p>
+            <p>If you find a place where the framework gives bad advice, produces constraint violations, or fails to surface a real risk — open an issue. That feedback is the most valuable input the project can receive.</p>
+            <div class="about-oss-actions">
+              <button class="btn btn-primary" data-page="getstarted">Get Started</button>
+              <button class="btn btn-ghost" data-page="principles">Read the Principles</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════ EXAMPLES ═══ -->
+    <section class="page" id="page-examples">
+      <div class="page-inner">
+
+        <header class="section-header reveal">
+          <div class="badge">In Practice</div>
+          <h2>Real Examples</h2>
+          <p>What TeamBrain actually looks like when applied to real engineering decisions.</p>
+        </header>
+
+        <!-- Example 1: intent-check -->
+        <div class="example-block reveal">
+          <div class="example-header">
+            <div class="example-num">Example 1</div>
+            <h3>Running /intent-check Before Adding a Cache</h3>
+            <p class="example-scenario">Scenario: A team wants to add Redis caching to a slow API endpoint. Without TeamBrain, they'd start installing Redis. With TeamBrain, they run /intent-check first.</p>
+          </div>
+          <div class="example-terminal">
+            <div class="term-bar">
+              <div class="term-dots"><span></span><span></span><span></span></div>
+              <span class="term-title">$ /intent-check — Add Redis cache to /api/products</span>
+            </div>
+            <div class="term-body">
+              <div class="term-q">1. What is the actual problem?</div>
+              <div class="term-a">The /api/products endpoint takes 800ms average. Users are experiencing slowness during business hours. The problem is response latency — not throughput. We haven't profiled whether the database or the application layer is the bottleneck.</div>
+
+              <div class="term-q">2. Who is affected?</div>
+              <div class="term-a">End users on the product listing page. Also the mobile team who call this endpoint on every app launch. Any caching strategy needs to account for both.</div>
+
+              <div class="term-q">3. What are you assuming?</div>
+              <div class="term-a">— Assuming the database is the bottleneck (not confirmed by profiling)<br>— Assuming product data is safe to cache (price changes? inventory?)<br>— Assuming the team can operate a Redis instance (no current Redis in stack)<br>— Assuming cache invalidation is straightforward (it never is)</div>
+
+              <div class="term-highlight term-highlight--warn">⚠️ Assumption 3 is a hidden requirement: the team has no Redis experience or infrastructure. This changes the recommendation entirely.</div>
+
+              <div class="term-q">4. What are the edge cases?</div>
+              <div class="term-a">— Price changes going live but users seeing cached stale prices<br>— Out-of-stock items showing as available<br>— Cache stampede under load when cache expires<br>— Cache miss rate in off-hours vs peak hours</div>
+
+              <div class="term-q">5. What could go wrong?</div>
+              <div class="term-a">1. Serving stale product data during a flash sale (revenue / trust impact)<br>2. Redis becomes a new SPOF — if Redis goes down, does the API fail or fall back?<br>3. Added ops burden: Redis monitoring, eviction policies, memory sizing — team unprepared</div>
+
+              <div class="term-q">6. What is NOT in scope?</div>
+              <div class="term-a">This change does not address the root cause of slowness (may be N+1 queries, missing DB index, or application logic). Caching may mask a fixable underlying problem.</div>
+
+              <div class="term-q">7. Is there a simpler solution?</div>
+              <div class="term-a">Yes: add a database index on the most-queried field. 2-hour change, no new infrastructure, no invalidation logic. Should be investigated before Redis is provisioned.</div>
+
+              <div class="term-highlight term-highlight--good">✅ Recommendation: Profile first. Add the DB index. Revisit caching only if latency persists. If caching is still needed, use HTTP cache headers (no new infra) before introducing Redis.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example 2: arch-review violation -->
+        <div class="example-block reveal" style="--d:.05s">
+          <div class="example-header">
+            <div class="example-num">Example 2</div>
+            <h3>Intent Violation Detected During /arch-review</h3>
+            <p class="example-scenario">Scenario: A developer proposes direct database sharing between two microservices to "simplify the integration." The AI detects a constraint violation.</p>
+          </div>
+          <div class="example-terminal">
+            <div class="term-bar">
+              <div class="term-dots"><span></span><span></span><span></span></div>
+              <span class="term-title">$ /arch-review — Direct DB access from Order Service to User Service</span>
+            </div>
+            <div class="term-body">
+              <div class="term-violation">
+                <div class="term-violation-title">⚠️ Intent Violation Detected</div>
+                <div class="term-violation-row"><span class="tv-label">Requested action:</span> Order Service reads directly from User Service's database to avoid an API call.</div>
+                <div class="term-violation-row"><span class="tv-label">Violated constraint:</span> "Services communicate via contracts (APIs, events). Direct database sharing between services is not permitted." — <em>constraints.md, Architectural Constraints #1</em></div>
+                <div class="term-violation-row"><span class="tv-label">Why it matters:</span> Direct DB sharing creates invisible coupling. If User Service changes its schema, Order Service breaks silently. There is no contract, no versioning, no circuit breaker. Under stress, this becomes a cascading failure path.</div>
+                <div class="term-violation-row"><span class="tv-label">Compliant alternative:</span> Expose a <code>GET /users/:id/profile</code> endpoint from User Service with a defined contract. Order Service calls the API. Cache the response at the Order Service layer if latency is a concern. This preserves the service boundary and gives User Service the ability to evolve its schema independently.</div>
+              </div>
+              <div class="term-a" style="margin-top: 16px;">If this constraint must be violated (e.g., performance requirements make the API call untenable), follow the Constraint Violation Protocol: name the violation explicitly, get written approval from the intent owner, document the exception with a remediation deadline in constraints.md.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example 3: before vs after -->
+        <div class="example-block reveal" style="--d:.1s">
+          <div class="example-header">
+            <div class="example-num">Example 3</div>
+            <h3>Before &amp; After: Migrating to Microservices</h3>
+            <p class="example-scenario">Scenario: Leadership asks the team to "break up the monolith." Without TeamBrain, the team starts planning service boundaries. With TeamBrain, they run /arch-review first.</p>
+          </div>
+          <div class="compare-grid">
+            <div class="compare-card compare-card--bad">
+              <div class="compare-label compare-label--bad">Without TeamBrain</div>
+              <ul class="compare-list">
+                <li>🔴 Team starts drawing service boundaries on a whiteboard</li>
+                <li>🔴 Nobody asks why — what problem does decomposition solve?</li>
+                <li>🔴 "Independent deployability" is assumed as a goal</li>
+                <li>🔴 Distributed transaction complexity is not surfaced</li>
+                <li>🔴 Team skill gap (Kubernetes, service mesh) goes unstated</li>
+                <li>🔴 Six months later: a distributed monolith with all the costs and none of the benefits</li>
+              </ul>
+            </div>
+            <div class="compare-card compare-card--good">
+              <div class="compare-label compare-label--good">With TeamBrain /arch-review</div>
+              <ul class="compare-list">
+                <li>✅ Problem restated: "We can't deploy without coordinating 4 teams"</li>
+                <li>✅ Real goal identified: deployment independence for the payments domain</li>
+                <li>✅ Alternative considered: modular monolith with clear domain boundaries</li>
+                <li>✅ Top risks named: data consistency, team skill gap, org structure mismatch</li>
+                <li>✅ Decision: extract payments only, keep the rest as a modular monolith</li>
+                <li>✅ Smaller scope, faster delivery, manageable risk surface</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════ TEMPLATES ═══ -->
+    <section class="page" id="page-templates">
+      <div class="page-inner">
+
+        <header class="section-header reveal">
+          <div class="badge">Starter Files</div>
+          <h2>Templates</h2>
+          <p>Copy these into your repo. Fill in the blanks. Commit. Every session inherits them automatically.</p>
+        </header>
+
+        <!-- File nav -->
+        <div class="tmpl-tabs reveal">
+          <button class="tmpl-tab active" data-tmpl="intent">architecture.intent.md</button>
+          <button class="tmpl-tab" data-tmpl="constraints">constraints.md</button>
+          <button class="tmpl-tab" data-tmpl="claude">CLAUDE.md</button>
+          <button class="tmpl-tab" data-tmpl="prompt">system.prompt.md</button>
+        </div>
+
+        <!-- architecture.intent.md -->
+        <div class="tmpl-panel active" id="tmpl-intent">
+          <div class="tmpl-meta">
+            <span class="tmpl-path">📄 /intent/architecture.intent.md</span>
+            <span class="tmpl-note">Required. CI blocks PRs if this is missing or empty.</span>
+          </div>
+          <pre class="code-block"><span class="c-comment"># Architecture Intent</span>
+<span class="c-comment">> Last revised: [DATE]</span>
+<span class="c-comment">> Owner: [ROLE — e.g. "Platform Engineering Lead"]</span>
+<span class="c-comment">> Status: DRAFT | ACTIVE | UNDER REVIEW</span>
+
+---
+
+<span class="c-heading">## Purpose</span>
+
+This system exists to <span class="c-value">**[one sentence — no buzzwords]**</span>.
+
+<span class="c-comment">> Example: "This system exists to route customer support</span>
+<span class="c-comment">> requests to the correct team with full context, reliably, under load."</span>
+
+---
+
+<span class="c-heading">## Primary Tradeoff</span>
+
+We prioritize <span class="c-value">**[X]**</span> over <span class="c-value">**[Y]**</span>.
+
+<span class="c-comment">> Example: "We prioritize consistency and auditability over deployment speed."</span>
+
+This means: when forced to choose, we choose [X] — even when
+[Y] would be faster, cheaper, or more convenient in the short term.
+
+---
+
+<span class="c-heading">## What We Explicitly Do Not Do</span>
+
+- We do not <span class="c-value">**[constraint 1]**</span>
+- We do not <span class="c-value">**[constraint 2]**</span>
+- We do not <span class="c-value">**[constraint 3]**</span>
+
+---
+
+<span class="c-heading">## Ownership</span>
+
+Ownership resides with <span class="c-value">**[named role]**</span>.
+
+This person:
+- Signs off on changes to this file
+- Is accountable when behavior diverges from declared intent
+- Leads the intent review when a trigger condition is met
+
+---
+
+<span class="c-heading">## Trigger Conditions for Revisit</span>
+
+This intent must be revisited when:
+
+- [ ] The system's primary user or use case changes
+- [ ] A constraint is violated and the team decides to accept it
+- [ ] Scale increases by an order of magnitude
+- [ ] Ownership changes hands
+
+---
+
+<span class="c-heading">## Change Log</span>
+
+| Date | Change | Author | Reason |
+|------|--------|--------|--------|
+| [DATE] | Initial draft | [NAME] | Project kickoff |</pre>
+        </div>
+
+        <!-- constraints.md -->
+        <div class="tmpl-panel" id="tmpl-constraints">
+          <div class="tmpl-meta">
+            <span class="tmpl-path">📄 /intent/constraints.md</span>
+            <span class="tmpl-note">Every constraint must trace back to declared intent. If it can't — remove it.</span>
+          </div>
+          <pre class="code-block"><span class="c-comment"># Architecture Constraints</span>
+<span class="c-comment">> Derived from: /intent/architecture.intent.md</span>
+<span class="c-comment">> Owner: [ROLE]</span>
+<span class="c-comment">> Last revised: [DATE]</span>
+
+---
+
+<span class="c-heading">## Architectural Constraints</span>
+
+- [ ] <span class="c-value">**Loose coupling over integration convenience**</span>
+  Services communicate via contracts (APIs, events).
+  Direct database sharing between services is not permitted.
+  <span class="c-comment">Justification: [link back to intent]</span>
+
+- [ ] <span class="c-value">**Stateless services where possible**</span>
+  Application tier must be horizontally scalable
+  without shared in-memory state.
+  <span class="c-comment">Justification: [link back to intent]</span>
+
+- [ ] <span class="c-value">**No single points of failure in the critical path**</span>
+  Any component whose failure takes down the primary user flow
+  must have a defined fallback or circuit breaker.
+
+---
+
+<span class="c-heading">## Deployment Constraints</span>
+
+- [ ] <span class="c-value">**Rollback before rapid release**</span>
+  Every deployment must be reversible within [X minutes]
+  without data loss.
+
+- [ ] <span class="c-value">**No direct production access**</span>
+  All changes to production must flow through CI/CD.
+  Manual SSH changes are not permitted except during
+  declared incidents.
+
+---
+
+<span class="c-heading">## Automation Constraints</span>
+
+- [ ] <span class="c-value">**AI may recommend, not execute**</span>
+  AI-generated suggestions for infra, schema changes,
+  or deployments must be reviewed by a human before execution.
+
+- [ ] <span class="c-value">**Secrets are never hardcoded**</span>
+  All credentials must be injected via secrets manager at runtime.
+
+---
+
+<span class="c-heading">## Constraint Violation Protocol</span>
+
+When a constraint must be violated:
+
+1. Name the violation explicitly — do not work around silently
+2. Get written approval from the intent owner
+3. Document with a remediation deadline below
+4. If permanent — revise the intent file
+
+| Date | Constraint | Reason | Approved By | Deadline |
+|------|------------|--------|-------------|----------|
+| —    | —          | —      | —           | —        |</pre>
+        </div>
+
+        <!-- CLAUDE.md -->
+        <div class="tmpl-panel" id="tmpl-claude">
+          <div class="tmpl-meta">
+            <span class="tmpl-path">📄 /CLAUDE.md</span>
+            <span class="tmpl-note">Committed to git. Loads automatically into every Claude Code session. Every developer inherits these standards.</span>
+          </div>
+          <pre class="code-block"><span class="c-comment"># CLAUDE.md — TeamBrain-Powered Project Memory</span>
+
+<span class="c-comment">> This file is committed to git. Every developer and every</span>
+<span class="c-comment">> Claude Code session inherits these standards automatically.</span>
+
+---
+
+<span class="c-heading">## Project Context</span>
+
+<span class="c-value">**Type:**</span> [API / Frontend / Platform / etc.]
+<span class="c-value">**Stack:**</span> [TypeScript / Python / Go / etc.]
+<span class="c-value">**Team:**</span> [2–5 developers]
+
+---
+
+<span class="c-heading">## Core Principle: Reasoning Before Solutions</span>
+
+Before writing any code, Claude must:
+
+1. <span class="c-value">**Restate the intent**</span> — What problem are we actually solving?
+2. <span class="c-value">**List assumptions**</span> — State them explicitly
+3. <span class="c-value">**Identify tradeoffs**</span> — What are we gaining and giving up?
+4. <span class="c-value">**Surface risks early**</span> — Flag before it becomes a bug
+5. <span class="c-value">**No invented facts**</span> — If unclear, ask. Do not guess.
+
+---
+
+<span class="c-heading">## Non-Negotiables</span>
+
+- Never implement without understanding intent → run /intent-check
+- Never invent requirements — stop and ask
+- Always document the why, not just the what
+- Tradeoffs must be explicit
+- Risk surfaces early — flag before sensitive paths
+- Glass-box thinking — reasoning must be visible
+
+---
+
+<span class="c-heading">## Sensitive Path Rules</span>
+
+Stop and flag before proceeding if touching:
+
+- /auth or authentication logic
+- Payment or billing logic
+- Database migrations or schema changes
+- External API integrations
+- Environment configuration
+- Rate limiting or security middleware
+
+---
+
+<span class="c-heading">## Team Workflow</span>
+
+New feature → /intent-check → implement → /review → PR
+Architecture change → /arch-review → team alignment → implement
+
+---
+
+<span class="c-heading">## References</span>
+
+- intent/architecture.intent.md — Why this system exists
+- intent/constraints.md — Rules derived from intent
+- .claude/commands/ — Slash command definitions</pre>
+        </div>
+
+        <!-- system.prompt.md -->
+        <div class="tmpl-panel" id="tmpl-prompt">
+          <div class="tmpl-meta">
+            <span class="tmpl-path">📄 /prompts/system.prompt.md</span>
+            <span class="tmpl-note">Version-controlled AI operating instructions. Paste into any AI session. Prevents prompt drift across the team.</span>
+          </div>
+          <pre class="code-block"><span class="c-comment"># AI System Prompt — Governed Mode</span>
+<span class="c-comment">> Stored in the repo so AI behavior is version-controlled</span>
+<span class="c-comment">> alongside code. Changes go through PR review.</span>
+
+---
+
+<span class="c-heading">## Paste This Into Your AI Session</span>
+
+You are operating under declared architecture intent
+for this project.
+
+The intent file is at: /intent/architecture.intent.md
+The constraints file is at: /intent/constraints.md
+
+You must:
+
+1. <span class="c-value">**Respect defined tradeoffs**</span>
+   Do not optimize against declared priorities.
+
+2. <span class="c-value">**Flag violations**</span>
+   If a request contradicts a constraint, say so
+   before complying.
+
+3. <span class="c-value">**Refuse silent shortcuts**</span>
+   Never implement a workaround that violates intent
+   without naming it.
+
+4. <span class="c-value">**Explain architectural reasoning**</span>
+   When suggesting a change, trace it back to a
+   constraint or flag the conflict.
+
+5. <span class="c-value">**Treat velocity as a tradeoff, not a default**</span>
+   Speed is only correct when it does not compromise
+   declared priorities.
+
+When you detect a constraint violation, respond with:
+
+<span class="c-value">⚠️ Intent Violation Detected</span>
+Requested action: [what was asked]
+Violated constraint: [which constraint this breaks]
+Why it matters: [consequence under stress or at scale]
+Compliant alternative: [what we can do instead]
+
+You are a coherence engine, not a velocity engine.
+Do not generate code until intent is declared.
+If intent has not been declared, ask for it.
+
+---
+
+<span class="c-heading">## Why This File Exists in the Repo</span>
+
+Most teams treat AI prompts as ephemeral — pasted into
+chat, lost after the session. This file treats AI
+operating instructions as infrastructure:
+
+- Version controlled
+- Reviewable in PRs
+- Traceable to intent
+- Consistent across all team members
+
+Any engineer can open a new AI session, reference this
+file, and operate inside the same constraints as everyone
+else. Changes to this prompt go through PR review and must
+reference the intent change that motivated the update.</pre>
+        </div>
+
+        <!-- Instructions -->
+        <div class="tmpl-instructions reveal" style="--d:.1s">
+          <h3>How to Use These Templates</h3>
+          <div class="tmpl-steps">
+            <div class="tmpl-step">
+              <div class="tmpl-step-num">1</div>
+              <div>Copy <code>architecture.intent.md</code> and <code>constraints.md</code> into your repo's <code>/intent/</code> folder. Fill in the blanks — purpose, tradeoff, explicit exclusions.</div>
+            </div>
+            <div class="tmpl-step">
+              <div class="tmpl-step-num">2</div>
+              <div>Copy <code>CLAUDE.md</code> to your project root. Customize the stack, team size, and any project-specific standards. Commit it — it loads automatically.</div>
+            </div>
+            <div class="tmpl-step">
+              <div class="tmpl-step-num">3</div>
+              <div>Copy <code>system.prompt.md</code> to <code>/prompts/</code>. Update your AI session with this file's contents before asking for architecture or code recommendations.</div>
+            </div>
+            <div class="tmpl-step">
+              <div class="tmpl-step-num">4</div>
+              <div>Add CI checks: verify <code>/intent/architecture.intent.md</code> exists, is non-empty, and has <code>Status: ACTIVE</code> before allowing PRs to merge.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════ CONTACT ═══ -->
+    <section class="page" id="page-contact">
+      <div class="page-inner">
+
+        <header class="section-header reveal">
+          <div class="badge">Get In Touch</div>
+          <h2>Contact &amp; Community</h2>
+          <p>TeamBrain is open source. Contribute, ask questions, or bring it to your team.</p>
+        </header>
+
+        <div class="contact-layout">
+
+          <!-- Left: form -->
+          <div class="contact-form-wrap reveal" style="--d:.05s">
+            <h3 class="contact-form-title">Send a Message</h3>
+            <p class="contact-form-desc">Have a question about applying TeamBrain in your org? Want to share how your team is using it? We'd love to hear from you.</p>
+
+            <form class="contact-form" id="contactForm" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="contactName">Name</label>
+                  <input class="form-input" id="contactName" type="text" placeholder="Your name" autocomplete="name" />
+                  <span class="form-error" id="errName"></span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="contactRole">Role</label>
+                  <input class="form-input" id="contactRole" type="text" placeholder="e.g. Staff Engineer" autocomplete="organization-title" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="contactEmail">Email <span class="form-required">*</span></label>
+                <input class="form-input" id="contactEmail" type="email" placeholder="you@company.com" autocomplete="email" />
+                <span class="form-error" id="errEmail"></span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="contactTopic">Topic</label>
+                <select class="form-input form-select" id="contactTopic">
+                  <option value="">Select a topic...</option>
+                  <option value="adoption">Adopting TeamBrain at my org</option>
+                  <option value="question">Question about the framework</option>
+                  <option value="contribution">Contributing to the project</option>
+                  <option value="speaking">Speaking / workshop inquiry</option>
+                  <option value="feedback">Feedback or bug report</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="contactMessage">Message <span class="form-required">*</span></label>
+                <textarea class="form-input form-textarea" id="contactMessage" placeholder="Tell us what you're working on or what you'd like to know..." rows="5"></textarea>
+                <span class="form-error" id="errMessage"></span>
+              </div>
+
+              <button type="submit" class="btn btn-primary form-submit">Send Message</button>
+
+              <div class="form-success" id="formSuccess">
+                <span class="form-success-icon">✅</span>
+                <div>
+                  <strong>Message sent!</strong>
+                  <p>Thanks for reaching out. We'll get back to you within 1–2 business days.</p>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- Right: info cards -->
+          <div class="contact-info">
+
+            <div class="contact-card reveal" style="--d:.1s">
+              <div class="contact-card-icon">⭐</div>
+              <h4>GitHub Repository</h4>
+              <p>The full TeamBrain framework — prompts, templates, intent files, and CLAUDE.md — is open source on GitHub.</p>
+              <div class="contact-card-link">github.com/kendallmark3/TeamBrain</div>
+            </div>
+
+            <div class="contact-card reveal" style="--d:.15s">
+              <div class="contact-card-icon">📖</div>
+              <h4>Read the Docs</h4>
+              <p>Start with <code>teambrain/TeamBrain.md</code> for the core reasoning principles, then <code>teambrain/IntentPrompt.md</code> for intent validation protocol.</p>
+              <div class="contact-card-files">
+                <span>TeamBrain.md</span>
+                <span>IntentPrompt.md</span>
+                <span>signals.md</span>
+                <span>DataArch.md</span>
+              </div>
+            </div>
+
+            <div class="contact-card reveal" style="--d:.2s">
+              <div class="contact-card-icon">🚀</div>
+              <h4>Adopt It for Your Team</h4>
+              <p>Copy the repo structure, fill in your intent files, commit CLAUDE.md, and every engineer on your team inherits the framework automatically when they open Claude.</p>
+              <button class="btn btn-ghost contact-card-btn" data-page="getstarted">See the 3-Step Setup →</button>
+            </div>
+
+            <div class="contact-card reveal" style="--d:.25s">
+              <div class="contact-card-icon">⚠️</div>
+              <h4>Reporting Issues</h4>
+              <p>If you find a bug, a broken constraint, or a place where the framework gives bad advice — open an issue on GitHub. Intent is not permanent; the framework evolves.</p>
+              <div class="contact-card-link">github.com/kendallmark3/TeamBrain/issues</div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Bottom: FAQ -->
+        <div class="faq reveal" style="--d:.1s">
+          <h3 class="faq-title">Frequently Asked Questions</h3>
+          <div class="faq-grid">
+            <div class="faq-item">
+              <div class="faq-q">Is TeamBrain only for Claude?</div>
+              <div class="faq-a">The framework is AI-agnostic — the principles, intent files, and templates work with any AI. The <code>/intent-check</code>, <code>/review</code>, and <code>/arch-review</code> commands are Claude Code slash commands, but the underlying questions can be run with any tool.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-q">Does this replace agile or sprint planning?</div>
+              <div class="faq-a">No. TeamBrain works alongside your existing process. It adds a reasoning layer before and after implementation — it doesn't replace how you plan, track, or ship work. Think of it as a decision quality gate, not a delivery methodology.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-q">How long does /intent-check take?</div>
+              <div class="faq-a">For a well-understood feature: 5–10 minutes. For something ambiguous: however long it takes to stop the ambiguity. The point is not speed — it's preventing the 3-week detour that comes from shipping on a misunderstood requirement.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-q">What if the team skips the commands?</div>
+              <div class="faq-a">CI checks enforce that intent files exist and are non-empty. PRs that fail intent checks are blocked from merge. The framework is designed to be enforced structurally, not just culturally.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-q">Can we modify the commands for our team?</div>
+              <div class="faq-a">Yes — the command files live in <code>.claude/commands/</code> and are version-controlled. Changes go through PR review, and any change must reference the constraint or intent that motivated the update. Prompt drift is treated like code drift.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-q">Who owns the architecture intent file?</div>
+              <div class="faq-a">A named role — typically the Tech Lead or Architect. That person signs off on changes to the intent file, is accountable when system behavior diverges from declared intent, and leads the intent review when trigger conditions are met.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Footer ───────────────────────────────────────────────────────────── -->
+  <footer class="footer" id="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo">TB</div>
+        <span>TeamBrain™ Intent-Driven Engineering</span>
+      </div>
+      <div class="footer-links">
+        <button class="footer-link" data-page="about">About</button>
+        <button class="footer-link" data-page="principles">Principles</button>
+        <button class="footer-link" data-page="framework">Framework</button>
+        <button class="footer-link" data-page="examples">Examples</button>
+        <button class="footer-link" data-page="templates">Templates</button>
+        <button class="footer-link" data-page="usecases">Use Cases</button>
+        <button class="footer-link" data-page="philosophy">Philosophy</button>
+        <button class="footer-link" data-page="getstarted">Get Started</button>
+        <button class="footer-link" data-page="contact">Contact</button>
+      </div>
+      <div class="footer-tagline">Good systems come from good judgment — not faster answers.</div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

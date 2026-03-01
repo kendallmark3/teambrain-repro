@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TeamBrain — Enterprise Reasoning Framework</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="brand">
+      <div class="brand-mark">TB</div>
+      <span class="brand-name">TeamBrain</span>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><button class="nl active" data-page="home">Home</button></li>
+      <li><button class="nl" data-page="what">What Is It</button></li>
+      <li><button class="nl" data-page="problem">The Problem</button></li>
+      <li><button class="nl" data-page="principles">Principles</button></li>
+      <li><button class="nl" data-page="usage">How It's Used</button></li>
+      <li><button class="nl" data-page="who">Who It's For</button></li>
+      <li><button class="nl" data-page="start">Get Started</button></li>
+    </ul>
+    <button class="burger" id="burger">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="drawer" id="drawer">
+    <button class="dl" data-page="home">Home</button>
+    <button class="dl" data-page="what">What Is It</button>
+    <button class="dl" data-page="problem">The Problem</button>
+    <button class="dl" data-page="principles">Principles</button>
+    <button class="dl" data-page="usage">How It's Used</button>
+    <button class="dl" data-page="who">Who It's For</button>
+    <button class="dl" data-page="start">Get Started</button>
+  </div>
+  <div class="backdrop" id="backdrop"></div>
+
+  <main>
+
+    <!-- ══ HOME ══════════════════════════════════════════════════════════════ -->
+    <section class="page" id="page-home">
+
+      <div class="home-hero">
+        <div class="hero-left">
+          <div class="eyebrow">Enterprise Reasoning Framework</div>
+          <h1 class="hero-h1">
+            <span id="tw"></span><span class="cur">|</span>
+          </h1>
+          <p class="hero-p">
+            TeamBrain turns AI into a virtual senior engineering team — capable of reviewing decisions, surfacing risk, challenging assumptions, and improving judgment under real enterprise delivery constraints.
+          </p>
+          <div class="hero-btns">
+            <button class="btn-p" data-page="principles">Explore Principles</button>
+            <button class="btn-g" data-page="what">What Is It →</button>
+          </div>
+          <div class="hero-pills">
+            <span class="pill">Not code generation</span>
+            <span class="pill">Not a chatbot persona</span>
+            <span class="pill">Not a magic solver</span>
+            <span class="pill pill-accent">A thinking amplifier</span>
+          </div>
+        </div>
+        <div class="hero-right">
+          <div class="glass-box">
+            <div class="gb-label">Glass-Box Reviewer</div>
+            <div class="gb-flow">
+              <div class="gb-node gb-node--in">Problem</div>
+              <div class="gb-arrow">
+                <div class="gb-steps">
+                  <div class="gb-step s1">Restate intent</div>
+                  <div class="gb-step s2">Surface assumptions</div>
+                  <div class="gb-step s3">Name tradeoffs</div>
+                  <div class="gb-step s4">Flag risks</div>
+                </div>
+                <div class="gb-line"></div>
+              </div>
+              <div class="gb-node gb-node--out">Decision</div>
+            </div>
+            <div class="gb-label gb-label--bottom">Not a black-box answer generator</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quote strip -->
+      <div class="quote-strip">
+        <blockquote>"Good systems come from good judgment — not faster answers."</blockquote>
+        <cite>— TeamBrain Philosophy</cite>
+      </div>
+
+      <!-- 3 pillars -->
+      <div class="pillars">
+        <div class="pillar reveal">
+          <div class="pillar-icon">🧠</div>
+          <h3>Think Before Building</h3>
+          <p>Every decision runs through structured reasoning — restate, assume, tradeoff, risk — before a single solution is proposed.</p>
+        </div>
+        <div class="pillar reveal" style="--d:.1s">
+          <div class="pillar-icon">🔍</div>
+          <h3>Glass-Box, Not Black-Box</h3>
+          <p>Reasoning is visible and linked to constraints. No hidden logic, no invented requirements, no fabricated confidence.</p>
+        </div>
+        <div class="pillar reveal" style="--d:.2s">
+          <div class="pillar-icon">🏛️</div>
+          <h3>Built for Enterprise Reality</h3>
+          <p>Designed for environments where decisions are expensive to undo, constraints are real, and clarity matters more than cleverness.</p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ══ WHAT IS IT ═════════════════════════════════════════════════════════ -->
+    <section class="page" id="page-what">
+      <div class="inner">
+
+        <header class="ph reveal">
+          <div class="eyebrow">What Is TeamBrain?</div>
+          <h2>A Thinking Operating System for Engineering Teams</h2>
+          <p>TeamBrain simulates how high-performing enterprise teams actually reason — drawing from global delivery environments, consulting and transformation programs, and principal-level engineering experience.</p>
+        </header>
+
+        <div class="what-split">
+          <div class="what-left reveal" style="--d:.05s">
+            <h3>What It Provides</h3>
+            <p>Repeatable, disciplined prompts that act like a thinking framework for your most important decisions. Not answers — the right questions asked in the right order.</p>
+
+            <div class="what-items">
+              <div class="what-item">
+                <div class="wi-icon">🏗️</div>
+                <div>
+                  <strong>Architecture Reviews</strong>
+                  <p>Evaluate designs against real constraints before the system is built and assumptions harden into production code.</p>
+                </div>
+              </div>
+              <div class="what-item">
+                <div class="wi-icon">⚖️</div>
+                <div>
+                  <strong>Delivery Tradeoffs</strong>
+                  <p>Name what you're gaining and giving up — before the decision is locked in and reversing it costs weeks.</p>
+                </div>
+              </div>
+              <div class="what-item">
+                <div class="wi-icon">⚠️</div>
+                <div>
+                  <strong>Risk Analysis</strong>
+                  <p>Surface the top failure modes before building — not after the production incident and post-mortem.</p>
+                </div>
+              </div>
+              <div class="what-item">
+                <div class="wi-icon">📊</div>
+                <div>
+                  <strong>Executive Communication</strong>
+                  <p>Translate technical decisions into business language stakeholders can actually evaluate and act on.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="what-right reveal" style="--d:.1s">
+            <div class="what-card">
+              <div class="wc-title">Drawing From</div>
+              <div class="wc-sources">
+                <div class="wcs">
+                  <div class="wcs-dot"></div>
+                  <div>Engineering-style global delivery environments</div>
+                </div>
+                <div class="wcs">
+                  <div class="wcs-dot"></div>
+                  <div>HCL Technologies-style consulting and transformation programs</div>
+                </div>
+                <div class="wcs">
+                  <div class="wcs-dot"></div>
+                  <div>Principal, Distinguished, and Visionary-level software engineers</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="what-card what-card--accent">
+              <div class="wc-title">Think of it as</div>
+              <div class="wc-big">A glass-box AI reviewer</div>
+              <div class="wc-not">not a black-box answer generator</div>
+              <div class="wc-desc">Reasoning is visible, traceable, and linked to your actual constraints — not generated in a vacuum.</div>
+            </div>
+
+            <div class="what-card">
+              <div class="wc-title">Status</div>
+              <div class="wc-status-items">
+                <div class="wc-status">✅ Actively evolving</div>
+                <div class="wc-status">✅ Used daily in real enterprise work</div>
+                <div class="wc-status">✅ Designed to grow over time</div>
+                <div class="wc-status">✅ Public by design. Practical by necessity.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ THE PROBLEM ════════════════════════════════════════════════════════ -->
+    <section class="page" id="page-problem">
+      <div class="inner">
+
+        <header class="ph reveal">
+          <div class="eyebrow">Why This Exists</div>
+          <h2>What Most AI Tools Get Wrong</h2>
+          <p>Most AI tools are optimized for the wrong thing. That's fine for simple tasks. For enterprise decisions, it's dangerous.</p>
+        </header>
+
+        <div class="problem-grid">
+          <div class="prob-card prob-bad reveal" style="--d:.05s">
+            <div class="prob-label prob-label--bad">Most AI Tools</div>
+            <ul class="prob-list">
+              <li>
+                <span class="prob-x">✗</span>
+                <div>
+                  <strong>Jump straight to solutions</strong>
+                  <p>Output is generated before the problem is understood. The question is answered but the right question was never asked.</p>
+                </div>
+              </li>
+              <li>
+                <span class="prob-x">✗</span>
+                <div>
+                  <strong>Invent requirements</strong>
+                  <p>Ambiguity is filled with plausible-sounding inventions. Confident fabrication is more dangerous than admitted uncertainty.</p>
+                </div>
+              </li>
+              <li>
+                <span class="prob-x">✗</span>
+                <div>
+                  <strong>Miss enterprise constraints</strong>
+                  <p>Security, org structure, compliance, budget, team capability — if it's not in the prompt, it doesn't exist.</p>
+                </div>
+              </li>
+              <li>
+                <span class="prob-x">✗</span>
+                <div>
+                  <strong>Optimize for speed over correctness</strong>
+                  <p>Fast answers feel valuable. In environments where decisions are costly to reverse, speed without judgment creates rework.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="prob-divider reveal" style="--d:.08s">
+            <div class="prob-vs">vs</div>
+          </div>
+
+          <div class="prob-card prob-good reveal" style="--d:.1s">
+            <div class="prob-label prob-label--good">TeamBrain</div>
+            <ul class="prob-list">
+              <li>
+                <span class="prob-check">✓</span>
+                <div>
+                  <strong>Restates the problem first</strong>
+                  <p>Before proposing anything, the actual problem is articulated in full. Misunderstanding the problem is the most expensive mistake.</p>
+                </div>
+              </li>
+              <li>
+                <span class="prob-check">✓</span>
+                <div>
+                  <strong>Calls out unclear requirements</strong>
+                  <p>If something is unclear, TeamBrain stops and asks rather than filling the gap with a plausible invention.</p>
+                </div>
+              </li>
+              <li>
+                <span class="prob-check">✓</span>
+                <div>
+                  <strong>Surfaces constraints explicitly</strong>
+                  <p>Every assumption is named. Hidden constraints — security, org structure, team skill gaps — are made visible before they become surprises.</p>
+                </div>
+              </li>
+              <li>
+                <span class="prob-check">✓</span>
+                <div>
+                  <strong>Slows down the right moments</strong>
+                  <p>The goal is not faster answers — it's better decisions. Judgment beats novelty. Clarity beats cleverness.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="problem-contexts reveal" style="--d:.15s">
+          <div class="pc-title">TeamBrain is designed for environments where:</div>
+          <div class="pc-grid">
+            <div class="pc-item">
+              <span class="pc-icon">💰</span>
+              <span>Decisions are expensive to undo</span>
+            </div>
+            <div class="pc-item">
+              <span class="pc-icon">🔒</span>
+              <span>Constraints are real — security, org structure, ownership</span>
+            </div>
+            <div class="pc-item">
+              <span class="pc-icon">💡</span>
+              <span>Clarity matters more than cleverness</span>
+            </div>
+            <div class="pc-item">
+              <span class="pc-icon">🎯</span>
+              <span>Judgment beats novelty</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ PRINCIPLES ═════════════════════════════════════════════════════════ -->
+    <section class="page" id="page-principles">
+      <div class="inner">
+
+        <header class="ph reveal">
+          <div class="eyebrow">Non-Negotiables</div>
+          <h2>6 Core Principles</h2>
+          <p>TeamBrain enforces these without exception. Skip one and you've built on a hidden assumption.</p>
+        </header>
+
+        <div class="principles-list">
+
+          <div class="pr reveal" style="--d:.03s">
+            <div class="pr-num">01</div>
+            <div class="pr-body">
+              <h3>Reasoning Before Solutions</h3>
+              <p>No solution is proposed until the problem is fully restated, constraints are surfaced, and the solution space is understood. The fastest path to a wrong answer is skipping this step.</p>
+              <div class="pr-bar"><div class="pr-fill"></div></div>
+            </div>
+          </div>
+
+          <div class="pr reveal" style="--d:.06s">
+            <div class="pr-num">02</div>
+            <div class="pr-body">
+              <h3>Explicit Assumptions</h3>
+              <p>Every assumption is named out loud. Hidden assumptions are hidden failures waiting for the right stress condition. If you're taking something for granted, say it — so it can be challenged before it becomes a production incident.</p>
+              <div class="pr-bar"><div class="pr-fill"></div></div>
+            </div>
+          </div>
+
+          <div class="pr reveal" style="--d:.09s">
+            <div class="pr-num">03</div>
+            <div class="pr-body">
+              <h3>Clear Tradeoffs</h3>
+              <p>Every decision has a cost. Speed vs. reliability. Simplicity vs. flexibility. Centralized vs. distributed. Name what you're gaining and what you're giving up — before the decision is locked in and the cost of reversing it is six weeks.</p>
+              <div class="pr-bar"><div class="pr-fill"></div></div>
+            </div>
+          </div>
+
+          <div class="pr reveal" style="--d:.12s">
+            <div class="pr-num">04</div>
+            <div class="pr-body">
+              <h3>Risk Surfaced Early</h3>
+              <p>The top failure modes are named before building starts — not discovered in a post-mortem. The cost of surfacing a risk early is a conversation. The cost of discovering it late is a production incident with an SLA review attached.</p>
+              <div class="pr-bar"><div class="pr-fill"></div></div>
+            </div>
+          </div>
+
+          <div class="pr reveal" style="--d:.15s">
+            <div class="pr-num">05</div>
+            <div class="pr-body">
+              <h3>No Invented Facts</h3>
+              <p>If something is unclear, TeamBrain calls it out instead of guessing. Fabricated confidence is more dangerous than admitted uncertainty. An AI that stops and asks is more valuable than one that fills the gap with a plausible invention.</p>
+              <div class="pr-bar"><div class="pr-fill"></div></div>
+            </div>
+          </div>
+
+          <div class="pr reveal" style="--d:.18s">
+            <div class="pr-num">06</div>
+            <div class="pr-body">
+              <h3>No Hidden Requirements</h3>
+              <p>Every constraint is made visible. Security policies, compliance rules, org structure, budget limits, team skill gaps — if it affects the decision, it belongs in the room. Silent constraints are the most dangerous kind.</p>
+              <div class="pr-bar"><div class="pr-fill"></div></div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="principles-callout reveal" style="--d:.2s">
+          <div class="pco-icon">💬</div>
+          <div class="pco-text">
+            <strong>If something is unclear, TeamBrain calls it out instead of guessing.</strong>
+            <p>This is not a limitation — it's the most important behavior in the framework. Acknowledged uncertainty is a decision input. Fabricated confidence is a failure mode.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ HOW IT'S USED ══════════════════════════════════════════════════════ -->
+    <section class="page" id="page-usage">
+      <div class="inner">
+
+        <header class="ph reveal">
+          <div class="eyebrow">In Practice</div>
+          <h2>How TeamBrain Is Used</h2>
+          <p>Three ways teams adopt the framework — from individual engineers to org-wide standards.</p>
+        </header>
+
+        <div class="usage-modes">
+          <div class="umode reveal" style="--d:.05s">
+            <div class="umode-num">01</div>
+            <div class="umode-icon">📦</div>
+            <h3>A Prompt Pack Loaded Into AI Tools</h3>
+            <p>Copy the prompts into ChatGPT, Claude, Copilot, or any AI tool. No setup. No dependencies. No special permissions required. The framework works wherever your team already works.</p>
+            <div class="umode-tags">
+              <span>ChatGPT</span><span>Claude</span><span>Copilot</span><span>Any AI</span>
+            </div>
+          </div>
+          <div class="umode reveal" style="--d:.1s">
+            <div class="umode-num">02</div>
+            <div class="umode-icon">🤝</div>
+            <h3>A Thinking Companion During Design &amp; Review</h3>
+            <p>Use it live during architecture sessions, PR reviews, or design meetings. The structured questions surface what's missing before the team moves forward — not after the review cycle is over.</p>
+            <div class="umode-tags">
+              <span>Architecture</span><span>PR Review</span><span>Design Sessions</span>
+            </div>
+          </div>
+          <div class="umode reveal" style="--d:.15s">
+            <div class="umode-num">03</div>
+            <div class="umode-icon">📐</div>
+            <h3>A Team-Level Reasoning Standard</h3>
+            <p>Commit CLAUDE.md to the repo. Every developer who opens the project inherits the same AI operating standards — no manual setup, no tribal knowledge, no drift between team members.</p>
+            <div class="umode-tags">
+              <span>CLAUDE.md</span><span>Git-tracked</span><span>Team-wide</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="usage-cases reveal" style="--d:.1s">
+          <h3 class="uc-title">Common Use Cases</h3>
+          <div class="uc-grid">
+            <div class="uc-item">
+              <div class="uci-icon">🏗️</div>
+              <div class="uci-label">Architecture reviews</div>
+            </div>
+            <div class="uc-item">
+              <div class="uci-icon">☁️</div>
+              <div class="uci-label">Cloud &amp; platform decisions</div>
+            </div>
+            <div class="uc-item">
+              <div class="uci-icon">🚀</div>
+              <div class="uci-label">DevOps and delivery models</div>
+            </div>
+            <div class="uc-item">
+              <div class="uci-icon">🔗</div>
+              <div class="uci-label">Integration strategy</div>
+            </div>
+            <div class="uc-item">
+              <div class="uci-icon">📊</div>
+              <div class="uci-label">Executive summaries</div>
+            </div>
+            <div class="uc-item">
+              <div class="uci-icon">🎓</div>
+              <div class="uci-label">Daily instruction for engineers leveling up</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="usage-repo reveal" style="--d:.15s">
+          <h3 class="ur-title">What's in the Repository</h3>
+          <div class="ur-grid">
+            <div class="ur-item">
+              <div class="uri-icon">💬</div>
+              <div>
+                <strong>Core TeamBrain prompts</strong>
+                <p>Enterprise reasoning models — copy, paste, apply.</p>
+              </div>
+            </div>
+            <div class="ur-item">
+              <div class="uri-icon">📄</div>
+              <div>
+                <strong>Structured markdown templates</strong>
+                <p>Intent files, constraint files, CLAUDE.md — ready to fill in.</p>
+              </div>
+            </div>
+            <div class="ur-item">
+              <div class="uri-icon">🔄</div>
+              <div>
+                <strong>Reusable decision frameworks</strong>
+                <p>Repeatable patterns for the decisions you make most often.</p>
+              </div>
+            </div>
+            <div class="ur-item">
+              <div class="uri-icon">🔎</div>
+              <div>
+                <strong>Review and challenge patterns</strong>
+                <p>Structured questions for architecture reviews, PRs, and design sessions.</p>
+              </div>
+            </div>
+            <div class="ur-item">
+              <div class="uri-icon">📢</div>
+              <div>
+                <strong>Executive translation formats</strong>
+                <p>Tech → business language templates for stakeholder communication.</p>
+              </div>
+            </div>
+          </div>
+          <div class="ur-note">Everything is copy-paste friendly · Tool-agnostic · Safe for restricted enterprise environments</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ WHO IT'S FOR ═══════════════════════════════════════════════════════ -->
+    <section class="page" id="page-who">
+      <div class="inner">
+
+        <header class="ph reveal">
+          <div class="eyebrow">Audience</div>
+          <h2>Who TeamBrain Is For</h2>
+          <p>Built for the people who make decisions that are costly to reverse — and live with the consequences.</p>
+        </header>
+
+        <div class="who-layout">
+
+          <div class="who-roles reveal" style="--d:.05s">
+            <h3>The Roles</h3>
+            <div class="role-list">
+              <div class="role">
+                <div class="role-icon">👤</div>
+                <div>
+                  <strong>Senior Engineers</strong>
+                  <p>Daily decisions about implementation that compound into architecture over time.</p>
+                </div>
+              </div>
+              <div class="role">
+                <div class="role-icon">👤</div>
+                <div>
+                  <strong>Tech Leads</strong>
+                  <p>Responsible for decisions that affect teams — and for the quality of reasoning behind them.</p>
+                </div>
+              </div>
+              <div class="role">
+                <div class="role-icon">👤</div>
+                <div>
+                  <strong>Architects</strong>
+                  <p>Designing systems under real constraints in environments where getting it wrong is expensive.</p>
+                </div>
+              </div>
+              <div class="role">
+                <div class="role-icon">👤</div>
+                <div>
+                  <strong>Consultants</strong>
+                  <p>Client-facing decisions that need a paper trail, defensible reasoning, and executive translation.</p>
+                </div>
+              </div>
+              <div class="role">
+                <div class="role-icon">👤</div>
+                <div>
+                  <strong>Engineering Managers</strong>
+                  <p>Owning delivery quality and the decision-making process of their teams.</p>
+                </div>
+              </div>
+              <div class="role">
+                <div class="role-icon">👤</div>
+                <div>
+                  <strong>Platform &amp; DevOps Leaders</strong>
+                  <p>Infrastructure decisions with wide blast radius and long tails of consequence.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="who-envs reveal" style="--d:.1s">
+            <h3>The Environments</h3>
+            <div class="env-list">
+              <div class="env">
+                <div class="env-icon">🏛️</div>
+                <div>
+                  <strong>Large Organizations</strong>
+                  <p>Complex org structures, multiple stakeholders, cross-team dependencies that are invisible until they break.</p>
+                </div>
+              </div>
+              <div class="env">
+                <div class="env-icon">⚖️</div>
+                <div>
+                  <strong>Regulated Environments</strong>
+                  <p>Finance, healthcare, government — compliance is a real constraint, not a checkbox to tick after the fact.</p>
+                </div>
+              </div>
+              <div class="env">
+                <div class="env-icon">📋</div>
+                <div>
+                  <strong>Consulting &amp; Delivery Models</strong>
+                  <p>Client-facing decisions need audit trails, defensible reasoning, and the ability to explain choices months later.</p>
+                </div>
+              </div>
+              <div class="env">
+                <div class="env-icon">🔗</div>
+                <div>
+                  <strong>Complex Integration Landscapes</strong>
+                  <p>Legacy systems, third-party APIs, multi-cloud — environments where invisible coupling becomes cascading failure.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Is / Is Not -->
+        <div class="is-isnot reveal" style="--d:.15s">
+          <div class="is-card">
+            <div class="is-title is-title--yes">TeamBrain IS</div>
+            <ul>
+              <li>A thinking amplifier, not a shortcut</li>
+              <li>A virtual senior engineering team</li>
+              <li>A structured reasoning process</li>
+              <li>A glass-box AI reviewer</li>
+              <li>A team-wide shared standard</li>
+              <li>A daily instructor for engineers leveling up</li>
+            </ul>
+          </div>
+          <div class="is-card is-card--not">
+            <div class="is-title is-title--no">TeamBrain IS NOT</div>
+            <ul>
+              <li>A code generator</li>
+              <li>A chatbot persona</li>
+              <li>A magic architecture solver</li>
+              <li>A replacement for engineers</li>
+              <li>A shortcut to faster answers</li>
+              <li>A substitute for judgment</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ GET STARTED ════════════════════════════════════════════════════════ -->
+    <section class="page" id="page-start">
+      <div class="inner">
+
+        <header class="ph reveal">
+          <div class="eyebrow">Getting Started</div>
+          <h2>No Setup. No Dependencies. No Permissions Required.</h2>
+          <p>Open a markdown file. Paste it into your AI tool. Provide real context. Let TeamBrain do the rest.</p>
+        </header>
+
+        <div class="start-steps">
+          <div class="ss reveal" style="--d:.05s">
+            <div class="ss-num">1</div>
+            <div class="ss-body">
+              <h3>Open Any Markdown File in the Repo</h3>
+              <p>Start with the core prompts in <code>/teambrain/TeamBrain.md</code> for the reasoning framework, or <code>/intent/architecture.intent.md</code> if you're adopting the full framework for a project team.</p>
+              <div class="ss-code">
+                <span class="sc-c">$</span> git clone github.com/kendallmark3/TeamBrain<br>
+                <span class="sc-c">$</span> open teambrain/TeamBrain.md
+              </div>
+            </div>
+          </div>
+          <div class="ss reveal" style="--d:.1s">
+            <div class="ss-num">2</div>
+            <div class="ss-body">
+              <h3>Paste Into Your AI Tool of Choice</h3>
+              <p>TeamBrain is tool-agnostic. Paste the prompt content into ChatGPT, Claude, Copilot, Gemini, or any AI that accepts system context. The framework works wherever you already work.</p>
+              <div class="ss-pills">
+                <span>ChatGPT</span><span>Claude</span><span>Copilot</span><span>Gemini</span><span>Any AI</span>
+              </div>
+            </div>
+          </div>
+          <div class="ss reveal" style="--d:.15s">
+            <div class="ss-num">3</div>
+            <div class="ss-body">
+              <h3>Provide Your Real Context</h3>
+              <p>Don't use generic examples. Provide your actual decision: the real system, the real constraints, the real team, the real org. TeamBrain's value comes from applying it to your actual situation — not hypotheticals.</p>
+              <div class="ss-example">
+                <div class="se-label">Instead of:</div>
+                <div class="se-bad">"How should I design a microservices system?"</div>
+                <div class="se-label se-label--good">Provide:</div>
+                <div class="se-good">"We have a 12-year-old monolith, a 6-person team, no Kubernetes experience, and leadership is asking us to decompose it. Here are our constraints..."</div>
+              </div>
+            </div>
+          </div>
+          <div class="ss reveal" style="--d:.2s">
+            <div class="ss-num">4</div>
+            <div class="ss-body">
+              <h3>Let TeamBrain Review, Challenge, and Clarify</h3>
+              <p>TeamBrain will restate the problem, surface assumptions, name tradeoffs, flag risks, and — if something is unclear — stop and ask rather than invent. That last behavior is the most important one.</p>
+              <div class="ss-outcome">
+                <div class="so-item">✅ Problem restated before any solution is proposed</div>
+                <div class="so-item">✅ Assumptions named and challengeable</div>
+                <div class="so-item">✅ At least two approaches with explicit tradeoffs</div>
+                <div class="so-item">✅ Top risks flagged before you start building</div>
+                <div class="so-item">✅ Unclear requirements trigger a stop, not an invention</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Philosophy -->
+        <div class="philosophy reveal" style="--d:.15s">
+          <div class="phi-quote">"Good systems come from good judgment — not faster answers."</div>
+          <div class="phi-expand">
+            <div class="phi-item">
+              <div class="phi-icon">⏸️</div>
+              <div>
+                <strong>Slow down the right moments</strong>
+                <p>The moments that feel urgent are often the ones that most need a pause. A 10-minute reasoning check prevents the 3-week rework cycle.</p>
+              </div>
+            </div>
+            <div class="phi-item">
+              <div class="phi-icon">⚡</div>
+              <div>
+                <strong>Speed up decision quality</strong>
+                <p>Better reasoning upfront means fewer surprises downstream. The fastest path to a shipped feature is not skipping the thinking — it's doing it well the first time.</p>
+              </div>
+            </div>
+            <div class="phi-item">
+              <div class="phi-icon">📉</div>
+              <div>
+                <strong>Reduce rework</strong>
+                <p>Most rework traces back to a misunderstood requirement, a hidden assumption, or a constraint that nobody named. TeamBrain surfaces all three before they become expensive.</p>
+              </div>
+            </div>
+            <div class="phi-item">
+              <div class="phi-icon">📈</div>
+              <div>
+                <strong>Improve outcomes over time</strong>
+                <p>The framework improves the quality of decisions across the team — not just in the moment, but as a compounding standard that raises the baseline.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Author + CTA -->
+        <div class="start-cta reveal" style="--d:.2s">
+          <div class="cta-inner">
+            <div class="cta-author">
+              <div class="cta-author-mark">MK</div>
+              <div>
+                <div class="cta-author-name">Mark Kendall</div>
+                <div class="cta-author-role">Senior Architect · Consultant · Systems Thinker</div>
+              </div>
+            </div>
+            <div class="cta-actions">
+              <div class="cta-repo">github.com/kendallmark3/TeamBrain</div>
+              <div class="cta-btns">
+                <button class="btn-p" data-page="principles">Read the Principles</button>
+                <button class="btn-g" data-page="problem">Understand the Problem</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="brand-mark" style="width:28px;height:28px;font-size:.7rem">TB</div>
+        <span>TeamBrain™ — Enterprise Reasoning Framework</span>
+      </div>
+      <div class="footer-links">
+        <button class="fl" data-page="what">What Is It</button>
+        <button class="fl" data-page="problem">The Problem</button>
+        <button class="fl" data-page="principles">Principles</button>
+        <button class="fl" data-page="usage">How It's Used</button>
+        <button class="fl" data-page="who">Who It's For</button>
+        <button class="fl" data-page="start">Get Started</button>
+      </div>
+      <div class="footer-q">"Good systems come from good judgment — not faster answers."</div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
