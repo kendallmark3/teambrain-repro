@@ -1,0 +1,122 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #020617;
+  color: #f8fafc;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #34d399;
+  text-shadow: 0 0 24px #34d39960;
+  text-transform: uppercase;
+}
+
+.scoreboard {
+  display: flex;
+  gap: 40px;
+  font-size: 0.95rem;
+  color: #64748b;
+}
+
+.scoreboard span > span {
+  color: #f8fafc;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+/* Canvas + overlay sit inside this relative wrapper */
+.canvas-wrapper {
+  position: relative;
+  line-height: 0; /* removes gap below canvas */
+}
+
+#gameCanvas {
+  display: block;
+  border: 2px solid #1e293b;
+  border-radius: 8px;
+}
+
+/* Overlay covers the canvas exactly */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(2, 6, 23, 0.88);
+  border-radius: 8px;
+  backdrop-filter: blur(2px);
+  transition: opacity 0.2s;
+}
+
+.overlay.hidden {
+  display: none;
+}
+
+.overlay-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.overlay-content h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #34d399;
+  text-shadow: 0 0 16px #34d39966;
+}
+
+.overlay-content p {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+button {
+  padding: 11px 32px;
+  background: #34d399;
+  color: #020617;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+  box-shadow: 0 0 16px #34d39940;
+}
+
+button:hover {
+  background: #6ee7b7;
+  box-shadow: 0 0 24px #34d39966;
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+.controls {
+  color: #334155;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+}

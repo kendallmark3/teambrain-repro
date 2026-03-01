@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snake</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Snake</h1>
+
+    <div class="scoreboard">
+      <span>Score: <span id="score">0</span></span>
+      <span>Best: <span id="highScore">0</span></span>
+    </div>
+
+    <div class="canvas-wrapper">
+      <canvas id="gameCanvas" width="400" height="400"></canvas>
+
+      <div id="overlay" class="overlay">
+        <div class="overlay-content">
+          <h2 id="overlayTitle">Snake</h2>
+          <p id="overlayMessage">Use arrow keys or WASD to move</p>
+          <button id="startBtn">Start Game</button>
+        </div>
+      </div>
+    </div>
+
+    <p class="controls">Arrow Keys / WASD &nbsp;·&nbsp; Eat the red dot &nbsp;·&nbsp; Don't hit the walls</p>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
