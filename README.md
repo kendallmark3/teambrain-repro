@@ -1,4 +1,4 @@
-# [Project Name]
+# Intent-Driven Engineering — TeamBrain™ Framework
 > Intent-Driven Engineering — TeamBrain™ Framework
 
 ---
