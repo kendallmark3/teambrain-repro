@@ -21,6 +21,7 @@
       <li><button class="nl" data-page="usage">How It's Used</button></li>
       <li><button class="nl" data-page="who">Who It's For</button></li>
       <li><button class="nl" data-page="start">Get Started</button></li>
+      <li><button class="nl nl--acc" data-page="agents">Claude Agents</button></li>
     </ul>
     <button class="burger" id="burger">
       <span></span><span></span><span></span>
@@ -35,6 +36,7 @@
     <button class="dl" data-page="usage">How It's Used</button>
     <button class="dl" data-page="who">Who It's For</button>
     <button class="dl" data-page="start">Get Started</button>
+    <button class="dl dl--acc" data-page="agents">Claude Agents</button>
   </div>
   <div class="backdrop" id="backdrop"></div>
 
@@ -737,6 +739,160 @@
       </div>
     </section>
 
+    <!-- ══ CLAUDE AGENTS ═════════════════════════════════════════════════════ -->
+    <section class="page" id="page-agents">
+      <div class="inner">
+
+        <header class="ph reveal">
+          <div class="eyebrow">Claude Agent SDK</div>
+          <h2>Build AI That Acts, Not Just Answers</h2>
+          <p>Claude agents are autonomous AI systems that execute multi-step tasks using built-in tools — without you implementing the tool loop. Give it a prompt and allowed tools; the SDK handles the rest.</p>
+        </header>
+
+        <!-- What vs API -->
+        <div class="ag-compare reveal" style="--d:.05s">
+          <div class="ag-col ag-col--bad">
+            <div class="ag-col-label">Without the Agent SDK</div>
+            <div class="ag-col-items">
+              <div class="ag-item"><span class="ag-x">✗</span><span>Implement tool execution loop manually</span></div>
+              <div class="ag-item"><span class="ag-x">✗</span><span>Wire up every tool call and response</span></div>
+              <div class="ag-item"><span class="ag-x">✗</span><span>Handle errors, retries, and state yourself</span></div>
+              <div class="ag-item"><span class="ag-x">✗</span><span>Manage multi-step context manually</span></div>
+            </div>
+          </div>
+          <div class="ag-col ag-col--good">
+            <div class="ag-col-label">With the Agent SDK</div>
+            <div class="ag-col-items">
+              <div class="ag-item"><span class="ag-chk">✓</span><span>SDK runs the reasoning + tool loop for you</span></div>
+              <div class="ag-item"><span class="ag-chk">✓</span><span>Built-in tools: files, bash, web, search</span></div>
+              <div class="ag-item"><span class="ag-chk">✓</span><span>Automatic error handling and retries</span></div>
+              <div class="ag-item"><span class="ag-chk">✓</span><span>Sessions maintain context across queries</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tools grid -->
+        <div class="ag-section reveal" style="--d:.08s">
+          <div class="ag-section-title">Built-in Tools</div>
+          <div class="ag-tools-grid">
+            <div class="ag-tool"><div class="ag-tool-name">Read / Write / Edit</div><div class="ag-tool-desc">File operations — read any file, create new files, make precise edits</div></div>
+            <div class="ag-tool"><div class="ag-tool-name">Bash</div><div class="ag-tool-desc">Run terminal commands, scripts, tests, and builds</div></div>
+            <div class="ag-tool"><div class="ag-tool-name">Glob / Grep</div><div class="ag-tool-desc">Find files by pattern, search content with regex across entire codebases</div></div>
+            <div class="ag-tool"><div class="ag-tool-name">WebSearch / WebFetch</div><div class="ag-tool-desc">Search the web and fetch page content for real-time information</div></div>
+            <div class="ag-tool"><div class="ag-tool-name">AskUserQuestion</div><div class="ag-tool-desc">Pause and ask the user for clarification with structured multiple-choice</div></div>
+            <div class="ag-tool"><div class="ag-tool-name">Task (Subagents)</div><div class="ag-tool-desc">Spawn specialized child agents to parallelize or isolate work</div></div>
+          </div>
+        </div>
+
+        <!-- Permission modes -->
+        <div class="ag-section reveal" style="--d:.1s">
+          <div class="ag-section-title">Permission Modes</div>
+          <div class="ag-modes-grid">
+            <div class="ag-mode">
+              <div class="ag-mode-name">bypassPermissions</div>
+              <div class="ag-mode-desc">Fully autonomous — no approval prompts. Ideal for CI/CD pipelines and automated tasks.</div>
+              <div class="ag-mode-tag">CI/CD · Automation</div>
+            </div>
+            <div class="ag-mode">
+              <div class="ag-mode-name">acceptEdits</div>
+              <div class="ag-mode-desc">Auto-approve file changes, ask for everything else. Good balance for interactive development.</div>
+              <div class="ag-mode-tag">Development · Interactive</div>
+            </div>
+            <div class="ag-mode">
+              <div class="ag-mode-name">default</div>
+              <div class="ag-mode-desc">Custom approval logic via <code>canUseTool</code> callback. Full control over every action.</div>
+              <div class="ag-mode-tag">Custom · Fine-grained</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Code example -->
+        <div class="ag-section reveal" style="--d:.12s">
+          <div class="ag-section-title">Quick Start</div>
+          <div class="ag-code-block">
+            <div class="ag-code-bar">
+              <span class="ag-code-lang">TypeScript</span>
+              <span class="ag-code-label">Your first agent — reads a file, finds bugs, fixes them</span>
+            </div>
+            <pre class="ag-pre"><span class="c-cmt">// 1. Install: npm install @anthropic-ai/claude-agent-sdk</span>
+<span class="c-cmt">// 2. Set:     export ANTHROPIC_API_KEY=your-key</span>
+
+<span class="c-key">import</span> { query } <span class="c-key">from</span> <span class="c-str">"@anthropic-ai/claude-agent-sdk"</span>;
+
+<span class="c-key">for await</span> (<span class="c-key">const</span> message <span class="c-key">of</span> query({
+  prompt: <span class="c-str">"Review utils.py for bugs and fix them."</span>,
+  options: {
+    allowedTools: [<span class="c-str">"Read"</span>, <span class="c-str">"Edit"</span>, <span class="c-str">"Glob"</span>],
+    permissionMode: <span class="c-str">"acceptEdits"</span>
+  }
+})) {
+  <span class="c-key">if</span> (<span class="c-str">"result"</span> <span class="c-key">in</span> message) console.log(message.result);
+}</pre>
+          </div>
+        </div>
+
+        <!-- Subagents -->
+        <div class="ag-section reveal" style="--d:.14s">
+          <div class="ag-section-title">Multi-Agent Patterns (Subagents)</div>
+          <p style="margin-bottom:20px;font-size:.9rem;">Spawn specialized child agents to run tasks in parallel or in isolation. Each subagent has its own tools, permissions, and instructions.</p>
+          <div class="ag-subagent-grid">
+            <div class="ag-subagent">
+              <div class="ag-sub-icon">🔍</div>
+              <div class="ag-sub-name">code-reviewer</div>
+              <div class="ag-sub-tools">Tools: Read · Glob · Grep</div>
+              <div class="ag-sub-desc">Read-only analysis. Cannot modify files. Focused on quality and security.</div>
+            </div>
+            <div class="ag-subagent">
+              <div class="ag-sub-icon">🧪</div>
+              <div class="ag-sub-name">test-runner</div>
+              <div class="ag-sub-tools">Tools: Bash · Read · Grep</div>
+              <div class="ag-sub-desc">Executes tests and reports results. Cannot edit source files.</div>
+            </div>
+            <div class="ag-subagent">
+              <div class="ag-sub-icon">📝</div>
+              <div class="ag-sub-name">doc-writer</div>
+              <div class="ag-sub-tools">Tools: Read · Write · Glob</div>
+              <div class="ag-sub-desc">Reads code and generates documentation. Cannot run commands.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sessions + MCP -->
+        <div class="ag-split-section reveal" style="--d:.16s">
+          <div class="ag-split-card">
+            <div class="ag-split-icon">🔁</div>
+            <h3>Sessions</h3>
+            <p>Maintain context across multiple queries. Claude remembers what it read, analyzed, and decided — so follow-up prompts work naturally without repeating context.</p>
+            <div class="ag-split-code">
+              <span class="sc-c">const</span> { session_id } = await firstQuery();<br>
+              <span class="sc-c">// Resume with full context:</span><br>
+              query({ prompt: <span class="c-str">"Now fix the issues"</span>, options: { resume: session_id } })
+            </div>
+          </div>
+          <div class="ag-split-card">
+            <div class="ag-split-icon">🔌</div>
+            <h3>MCP — Model Context Protocol</h3>
+            <p>Connect agents to external systems: databases, browsers, REST APIs, and 200+ community tools. Plug in Playwright for browser automation, Postgres for database access, and more.</p>
+            <div class="ag-split-code">
+              mcpServers: {<br>
+              &nbsp;&nbsp;playwright: { command: <span class="c-str">"npx"</span>, args: [<span class="c-str">"@playwright/mcp@latest"</span>] }<br>
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- TeamBrain + Agents callout -->
+        <div class="ag-callout reveal" style="--d:.18s">
+          <div class="ag-callout-icon">🧠</div>
+          <div>
+            <strong>TeamBrain + Claude Agents</strong>
+            <p>Combine the reasoning framework with the Agent SDK: load TeamBrain prompts as the agent's system context. The agent reasons before acting — restating intent, surfacing assumptions, naming tradeoffs — before it touches a single file.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
   </main>
 
   <footer class="footer">
@@ -752,6 +908,7 @@
         <button class="fl" data-page="usage">How It's Used</button>
         <button class="fl" data-page="who">Who It's For</button>
         <button class="fl" data-page="start">Get Started</button>
+        <button class="fl fl--acc" data-page="agents">Claude Agents</button>
       </div>
       <div class="footer-q">"Good systems come from good judgment — not faster answers."</div>
     </div>
