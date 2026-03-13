@@ -1,11 +1,4 @@
-Mark — this is perfect for your Intent-Driven Engineering demo follow-up. A Claude CLI cheat sheet in Markdown will let your team run everything inside VS Code terminal exactly like you showed.
 
-You can drop this directly into your repo as:
-
-/docs/claude-cheatsheet.md
-
-
-⸻
 
 Claude Code CLI Cheat Sheet
 
