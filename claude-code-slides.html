@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code — Applied AI Engineers</title>
+  <style>
+    :root {
+      --bg:       #0a0e1a;
+      --surface:  #111827;
+      --border:   #1f2d45;
+      --accent:   #6366f1;
+      --accent2:  #22d3ee;
+      --accent3:  #f59e0b;
+      --text:     #f1f5f9;
+      --muted:    #94a3b8;
+      --code-bg:  #0f172a;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+
+    /* ── Top Chrome ── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 52px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center;
+      padding: 0 2rem; gap: 1.5rem;
+      z-index: 100;
+    }
+    .nav-logo {
+      font-size: 0.85rem; font-weight: 700;
+      color: var(--accent); letter-spacing: 0.05em; white-space: nowrap;
+    }
+    .progress-wrap {
+      flex: 1; height: 4px;
+      background: var(--border); border-radius: 2px; overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 2px;
+      transition: width 0.45s ease;
+    }
+    .slide-counter {
+      font-size: 0.8rem; color: var(--muted);
+      white-space: nowrap; font-variant-numeric: tabular-nums;
+    }
+
+    /* ── Stage ── */
+    .stage {
+      position: fixed;
+      top: 52px; bottom: 56px; left: 0; right: 0;
+      overflow: hidden;
+    }
+
+    /* ── Slides ── */
+    .slide {
+      position: absolute; inset: 0;
+      padding: 2.5rem 4rem;
+      display: flex; flex-direction: column; justify-content: center;
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+      pointer-events: none;
+      overflow-y: auto;
+    }
+    .slide.active {
+      opacity: 1; transform: translateY(0); pointer-events: auto;
+    }
+    .slide::-webkit-scrollbar { width: 4px; }
+    .slide::-webkit-scrollbar-track { background: transparent; }
+    .slide::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    .slide.centered { align-items: center; text-align: center; }
+
+    /* ── Bottom Controls ── */
+    .controls {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      height: 56px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem; z-index: 100;
+    }
+    .btn {
+      padding: 0.45rem 1.25rem; border-radius: 6px;
+      border: 1px solid var(--border);
+      background: transparent; color: var(--text);
+      font-size: 0.85rem; font-family: inherit;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .btn:hover:not(:disabled) { background: var(--border); border-color: var(--accent); }
+    .btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .btn-next {
+      background: var(--accent); border-color: var(--accent);
+      color: #fff; font-weight: 600;
+    }
+    .btn-next:hover:not(:disabled) { background: #4f52d8; border-color: #4f52d8; }
+    .hint { font-size: 0.75rem; color: var(--muted); }
+
+    /* ── Design System ── */
+
+    .tag {
+      display: inline-block;
+      padding: 0.25rem 0.75rem; border-radius: 999px;
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      background: rgba(99,102,241,0.15); color: var(--accent);
+      border: 1px solid rgba(99,102,241,0.3);
+      margin-bottom: 1rem; width: fit-content;
+    }
+    .tag.cyan  { background: rgba(34,211,238,0.12); color: var(--accent2); border-color: rgba(34,211,238,0.3); }
+    .tag.amber { background: rgba(245,158,11,0.12);  color: var(--accent3); border-color: rgba(245,158,11,0.3); }
+
+    .rule {
+      height: 4px; width: 56px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 2px; margin: 0.75rem 0 1.25rem;
+    }
+
+    h1 { font-size: 2.7rem; font-weight: 800; line-height: 1.15; margin-bottom: 0.5rem; }
+    h2 { font-size: 1.85rem; font-weight: 700; line-height: 1.2; margin-bottom: 0.5rem; }
+    p  { font-size: 1rem; line-height: 1.65; color: var(--muted); }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .accent2-text { color: var(--accent2); }
+    .accent-text  { color: var(--accent); }
+
+    /* 2-col */
+    .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 1.25rem; }
+    .col {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem;
+    }
+    .col h3 { font-size: 0.92rem; font-weight: 700; margin-bottom: 0.65rem; }
+    .col ul { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+    .col ul li {
+      font-size: 0.84rem; color: var(--muted);
+      display: flex; align-items: flex-start; gap: 0.45rem;
+    }
+    .col ul li::before { content: '→'; color: var(--accent); flex-shrink: 0; }
+    .col-red   { border-color: rgba(239,68,68,0.4)!important;  background: rgba(239,68,68,0.05)!important; }
+    .col-green { border-color: rgba(34,197,94,0.4)!important;  background: rgba(34,197,94,0.05)!important; }
+
+    /* Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 0.9rem; margin-top: 1.25rem;
+    }
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.1rem;
+      display: flex; flex-direction: column; gap: 0.4rem;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: var(--accent); }
+    .card .icon { font-size: 1.6rem; }
+    .card h3 { font-size: 0.9rem; font-weight: 700; }
+    .card p  { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
+    /* Pill list */
+    .pill-list { display: flex; flex-wrap: wrap; gap: 0.55rem; margin-top: 1.25rem; }
+    .pill {
+      padding: 0.3rem 0.85rem; border-radius: 999px;
+      font-size: 0.78rem; font-weight: 500;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border); color: var(--muted);
+    }
+    .pill.hi { border-color: var(--accent); color: var(--accent); background: rgba(99,102,241,0.1); }
+
+    /* Quote block */
+    .quote-block {
+      border-left: 3px solid var(--accent);
+      padding: 0.75rem 1.1rem; margin-top: 1.25rem;
+      background: rgba(99,102,241,0.06);
+      border-radius: 0 8px 8px 0;
+    }
+    .quote-block p { font-size: 0.92rem; font-style: italic; color: var(--text); }
+
+    /* Timeline */
+    .timeline { display: flex; flex-direction: column; margin-top: 1rem; }
+    .timeline-item {
+      display: grid; grid-template-columns: 90px 1fr;
+      gap: 1rem; align-items: start;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .timeline-item:last-child { border-bottom: none; }
+    .tl-time {
+      font-size: 0.75rem; font-weight: 600; color: var(--accent3);
+      font-family: 'Cascadia Code', 'Fira Code', monospace;
+      padding-top: 0.1rem;
+    }
+    .tl-content h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.15rem; }
+    .tl-content p  { font-size: 0.78rem; color: var(--muted); line-height: 1.4; }
+
+    /* Checklist */
+    .checklist {
+      display: flex; flex-direction: column; gap: 0.55rem;
+      margin-top: 0; counter-reset: steps;
+    }
+    .checklist-item {
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      padding: 0.65rem 0.9rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; font-size: 0.83rem; color: var(--muted);
+      counter-increment: steps;
+    }
+    .checklist-item::before {
+      content: counter(steps);
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 1.5rem; height: 1.5rem; border-radius: 50%;
+      background: var(--accent); color: #fff;
+      font-size: 0.72rem; font-weight: 700; flex-shrink: 0;
+    }
+
+    /* Code block */
+    .code-block {
+      background: var(--code-bg); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.1rem 1.25rem;
+      font-family: 'Cascadia Code', 'Fira Code', monospace;
+      font-size: 0.82rem; line-height: 1.8; color: var(--text);
+      margin-top: 1.1rem; overflow-x: auto; white-space: pre;
+    }
+    .code-block .lbl { color: var(--accent3); font-weight: 700; }
+    .code-block .key { color: var(--accent2); }
+    .code-block .val { color: #86efac; }
+
+    /* Big statement (slide 11) */
+    .big-statement {
+      font-size: 2.1rem; font-weight: 800; line-height: 1.3; margin-bottom: 0.65rem;
+    }
+    .secondary-statement {
+      font-size: 1.15rem; color: var(--muted); margin-bottom: 1.25rem;
+    }
+
+    .subtitle { font-size: 1rem; color: var(--muted); margin-bottom: 0.25rem; }
+
+    code {
+      font-family: 'Cascadia Code', 'Fira Code', monospace;
+      font-size: 0.85em;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Top Chrome -->
+<nav class="nav">
+  <div class="nav-logo">◆ Claude Code</div>
+  <div class="progress-wrap"><div class="progress-bar" id="progress"></div></div>
+  <div class="slide-counter" id="counter">1 / 11</div>
+</nav>
+
+<!-- Slide Stage -->
+<div class="stage">
+
+  <!-- ── Slide 1: Title ── -->
+  <section class="slide active" id="slide-0">
+    <div class="tag">7 AM Activation Session</div>
+    <h1><span class="gradient-text">Claude Code</span> /<br>for Applied AI Engineers</h1>
+    <div class="rule"></div>
+    <p class="subtitle">one hour &middot; high impact &middot; ready to build Monday</p>
+    <div class="pill-list">
+      <span class="pill hi">60-Minute Session</span>
+      <span class="pill hi">Intent-Driven Dev</span>
+      <span class="pill hi">CLEAR Method</span>
+      <span class="pill hi">Claude.md Governance</span>
+      <span class="pill hi">Monday Activation</span>
+    </div>
+  </section>
+
+  <!-- ── Slide 2: The Framing ── -->
+  <section class="slide" id="slide-1">
+    <div class="tag">The Framing</div>
+    <h2>We are not replacing engineers.<br>We are <span class="accent2-text">upgrading</span> them.</h2>
+    <div class="rule"></div>
+    <div class="cols">
+      <div class="col">
+        <h3>✅ What AI Is</h3>
+        <ul>
+          <li>A force multiplier on your existing expertise</li>
+          <li>A junior developer that executes your intent</li>
+          <li>A tool that drafts, scaffolds, and accelerates</li>
+          <li>Only as good as the engineer supervising it</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>🚫 What AI is NOT</h3>
+        <ul>
+          <li>A replacement for engineering judgment</li>
+          <li>A source of truth for your architecture</li>
+          <li>A way to skip code review or testing</li>
+          <li>Safe to use without understanding the output</li>
+        </ul>
+      </div>
+    </div>
+    <div class="quote-block">
+      <p>"The engineer is the supervisor. Claude is the junior developer."</p>
+    </div>
+  </section>
+
+  <!-- ── Slide 3: What Claude Code Is ── -->
+  <section class="slide" id="slide-2">
+    <div class="tag cyan">5–15 min</div>
+    <h2>What Claude Code Actually Is</h2>
+    <div class="rule"></div>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">🧠</div>
+        <h3>LLM Core</h3>
+        <p>Powered by Claude Sonnet. Understands intent, generates code, reasons about architecture and tradeoffs.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📁</div>
+        <h3>Repo Awareness</h3>
+        <p>Reads your actual codebase. Understands file structure, existing patterns, and naming conventions.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📋</div>
+        <h3>Claude.md Memory</h3>
+        <p>Persistent governance layer. Enforces your team's standards, constraints, and architectural decisions.</p>
+      </div>
+      <div class="card">
+        <div class="icon">⚙️</div>
+        <h3>Execution Env</h3>
+        <p>Runs shell commands, edits files, runs tests. Not just suggestions — it does the work in your repo.</p>
+      </div>
+    </div>
+    <div class="quote-block">
+      <p>"It is not autocomplete. It is intent execution."</p>
+    </div>
+  </section>
+
+  <!-- ── Slide 4: Intent-Driven Development ── -->
+  <section class="slide" id="slide-3">
+    <div class="tag amber">15–25 min</div>
+    <h2>Intent-Driven Development</h2>
+    <div class="rule"></div>
+    <div class="cols">
+      <div class="col col-red">
+        <h3 style="color:#f87171;">❌ Old Way</h3>
+        <div class="code-block" style="margin-top:0.65rem; font-size:0.78rem; white-space:pre-wrap;">"Write me an AI endpoint
+for user chat."</div>
+        <ul style="margin-top:0.75rem;">
+          <li>Vague — no context or constraints</li>
+          <li>No validation rules specified</li>
+          <li>No security requirements stated</li>
+          <li>Produces hallucinated implementation</li>
+        </ul>
+      </div>
+      <div class="col col-green">
+        <h3 style="color:#4ade80;">✅ Intent-Driven</h3>
+        <div class="code-block" style="margin-top:0.65rem; font-size:0.76rem; white-space:pre-wrap;"><span class="val">Create POST /api/v1/chat
+
+Business goal: stream a Claude response
+to an authenticated user's prompt.
+API contract: accept {message, history},
+return streamed text chunks.
+Validation: message non-empty, max 4096
+tokens. 400 if exceeded.
+Security: API key from env only. Never
+log raw prompt contents.
+Observability: log token usage + latency.
+Arch: routes → service → LLM client.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Slide 5: What Goes Into an Intent ── -->
+  <section class="slide" id="slide-4">
+    <div class="tag amber">Intent = Full Context</div>
+    <h2>What Goes Into an Intent</h2>
+    <div class="rule"></div>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">🎯</div>
+        <h3>Business Goal</h3>
+        <p>Why does this feature exist? What user problem does it solve? State it in one sentence.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📡</div>
+        <h3>API Contract</h3>
+        <p>Exact method, path, request shape, response DTO, and pagination model.</p>
+      </div>
+      <div class="card">
+        <div class="icon">✅</div>
+        <h3>Validation Rules</h3>
+        <p>Input constraints, field formats, boundary values, and what returns 400.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🔒</div>
+        <h3>Security Constraints</h3>
+        <p>Auth requirements, role checks, ownership validation, and what returns 403.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📊</div>
+        <h3>Observability</h3>
+        <p>What gets logged, what gets metrics, what gets traced, and where.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🏗️</div>
+        <h3>Arch Boundaries</h3>
+        <p>Which layers are involved, which services to call, and what must not be crossed.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Slide 6: CLEAR Prompt Method ── -->
+  <section class="slide" id="slide-5">
+    <div class="tag">25–35 min</div>
+    <h2>The <span class="accent-text">CLEAR</span> Prompt Method</h2>
+    <div class="rule"></div>
+    <div class="code-block"><span class="lbl">C</span>  <span class="key">— Context:    </span><span class="val">Python 3.11, FastAPI, Anthropic SDK, Pydantic, Postgres.</span>
+<span class="lbl">L</span>  <span class="key">— Layers:     </span><span class="val">Route → Service → LLM Client. No prompt logic in handlers.</span>
+<span class="lbl">E</span>  <span class="key">— Endpoint:   </span><span class="val">POST /api/v1/completions — stream a Claude chat response.</span>
+<span class="lbl">A</span>  <span class="key">— Assertions: </span><span class="val">Message non-empty, model in allowed list. 400 if invalid.</span>
+<span class="lbl">R</span>  <span class="key">— Risk flags: </span><span class="val">Rate limit per user. Never expose raw API keys in responses.</span></div>
+    <div class="quote-block">
+      <p>"Good prompting reduces rework by 50%."</p>
+    </div>
+  </section>
+
+  <!-- ── Slide 7: Claude.md Governance ── -->
+  <section class="slide" id="slide-6">
+    <div class="tag cyan">35–45 min</div>
+    <h2>Claude.md — The Governance Layer</h2>
+    <div class="rule"></div>
+    <div class="cols">
+      <div class="col">
+        <h3>What It Is</h3>
+        <ul style="margin-bottom:1rem;">
+          <li>A markdown file committed to your repo root</li>
+          <li>Loaded automatically by every Claude Code session</li>
+          <li>Acts as standing instructions for the AI</li>
+          <li>Shared across your entire team automatically</li>
+        </ul>
+        <h3>What It Enforces</h3>
+        <ul>
+          <li>No <code style="color:var(--accent3)">any</code> — strict types enforced on every prompt</li>
+          <li>Sensitive path rules (auth, payments, migrations)</li>
+          <li>Folder structure and naming conventions</li>
+          <li>Required error handling and logging patterns</li>
+        </ul>
+      </div>
+      <div class="col" style="display:flex; flex-direction:column; gap:0.75rem; padding:0; background:none; border:none;">
+        <div class="col col-red" style="border-radius:10px;">
+          <h3 style="color:#f87171;">❌ Without Claude.md</h3>
+          <ul>
+            <li>Claude invents its own patterns</li>
+            <li>Every session starts from scratch</li>
+            <li>No enforcement of team standards</li>
+            <li>Inconsistent, untraceable outputs</li>
+          </ul>
+        </div>
+        <div class="col col-green" style="border-radius:10px;">
+          <h3 style="color:#4ade80;">✅ With Claude.md</h3>
+          <ul>
+            <li>Standards enforced on every prompt</li>
+            <li>Team conventions are non-negotiable</li>
+            <li>New devs inherit standards instantly</li>
+            <li>Auditable, repeatable, governed output</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Slide 8: Guardrails ── -->
+  <section class="slide" id="slide-7">
+    <div class="tag amber">45–52 min</div>
+    <h2>Guardrails You Must Keep</h2>
+    <div class="rule"></div>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">🚫</div>
+        <h3>No Secrets</h3>
+        <p>Never commit API keys, passwords, or tokens. Validate via env vars at startup only.</p>
+      </div>
+      <div class="card">
+        <div class="icon">👀</div>
+        <h3>Review Everything</h3>
+        <p>Read every line Claude generates before merging. You own the output — not the model.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🧪</div>
+        <h3>Validate Edge Cases</h3>
+        <p>Claude optimizes for the happy path. Ask explicitly for boundary and error cases.</p>
+      </div>
+      <div class="card">
+        <div class="icon">⚠️</div>
+        <h3>Watch Hallucinations</h3>
+        <p>Verify library APIs, method signatures, and version compatibility against real docs.</p>
+      </div>
+      <div class="card">
+        <div class="icon">✅</div>
+        <h3>Run Tests</h3>
+        <p>Never ship AI-generated code without passing your full test suite. Tests are not optional.</p>
+      </div>
+    </div>
+    <div class="quote-block">
+      <p>"AI writes fast. Engineers validate."</p>
+    </div>
+  </section>
+
+  <!-- ── Slide 9: 60-Minute Agenda ── -->
+  <section class="slide" id="slide-8">
+    <div class="tag">Session Agenda</div>
+    <h2>60-Minute Agenda</h2>
+    <div class="rule"></div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="tl-time">0–5 min</div>
+        <div class="tl-content">
+          <h4>Context &amp; Goals</h4>
+          <p>Why we're here, what we're building toward, success criteria for today.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-time">5–15 min</div>
+        <div class="tl-content">
+          <h4>What Claude Code Actually Is</h4>
+          <p>LLM core, repo awareness, Claude.md memory, execution environment.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-time">15–25 min</div>
+        <div class="tl-content">
+          <h4>Intent-Driven Development</h4>
+          <p>Old way vs intent-driven. Live demo: vague prompt → hallucination → structured prompt → correct code.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-time">25–35 min</div>
+        <div class="tl-content">
+          <h4>The CLEAR Prompt Method</h4>
+          <p>Context, Layers, Endpoint, Assertions, Risk flags. Practice writing a real endpoint prompt together.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-time">35–45 min</div>
+        <div class="tl-content">
+          <h4>Claude.md Governance</h4>
+          <p>Write your team's Claude.md live. Commit it. Watch it enforce standards immediately.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-time">45–58 min</div>
+        <div class="tl-content">
+          <h4>Monday Activation Plan</h4>
+          <p>Six concrete steps to go from zero to production-ready usage by Monday morning.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Slide 10: Monday Activation Plan ── -->
+  <section class="slide" id="slide-9">
+    <div class="tag cyan">52–58 min</div>
+    <h2>Monday Activation Plan</h2>
+    <div class="rule"></div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; align-items:start; margin-top:0.25rem;">
+      <div class="checklist">
+        <div class="checklist-item">Install Claude Code — <code style="color:var(--accent2);">npm i -g @anthropic-ai/claude-code</code></div>
+        <div class="checklist-item">Clone your team repo and run <code style="color:var(--accent2);">claude</code> from the root directory</div>
+        <div class="checklist-item">Read the existing Claude.md — or generate one from today's template</div>
+        <div class="checklist-item">Pick one real ticket. Write a full CLEAR intent prompt before touching code</div>
+        <div class="checklist-item">Run your full test suite before and after. Compare coverage delta</div>
+        <div class="checklist-item">Refactor one existing service with Claude — review every line before committing</div>
+      </div>
+      <div>
+        <p style="font-size:0.75rem; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.25rem;">Your First Task Prompt</p>
+        <div class="code-block" style="white-space:pre-wrap; font-size:0.77rem; margin-top:0.5rem;"><span class="lbl">C</span> <span class="key">Context:  </span><span class="val">Python 3.11, FastAPI, Anthropic SDK</span>
+<span class="lbl">L</span> <span class="key">Layers:   </span><span class="val">Route → Service → LLM Client</span>
+<span class="lbl">E</span> <span class="key">Endpoint: </span><span class="val">POST /api/v1/completions</span>
+<span class="lbl">A</span> <span class="key">Assert:   </span><span class="val">API key from env, max_tokens > 0</span>
+<span class="lbl">R</span> <span class="key">Risk:     </span><span class="val">Rate limit per user. No prompt
+injection via user input.
+
+Generate route, service, and unit tests.
+Do not add packages not already in
+requirements.txt.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Slide 11: The Close ── -->
+  <section class="slide centered" id="slide-10">
+    <div class="tag">The Close</div>
+    <div class="big-statement">AI will not replace <span class="accent2-text">engineers</span>.</div>
+    <div class="secondary-statement">Engineers who use AI well will replace those who don't.</div>
+    <div class="quote-block" style="max-width:560px; text-align:left;">
+      <p>"Your job isn't to code faster. It's to supervise smarter."</p>
+    </div>
+    <div class="pill-list" style="justify-content:center;">
+      <span class="pill hi">Intent First</span>
+      <span class="pill hi">Code Second</span>
+      <span class="pill hi">Engineer Always</span>
+    </div>
+  </section>
+
+</div>
+
+<!-- Bottom Controls -->
+<div class="controls">
+  <button class="btn" id="btn-prev" onclick="navigate(-1)" disabled>← Prev</button>
+  <span class="hint">Arrow keys or Space to navigate</span>
+  <button class="btn btn-next" id="btn-next" onclick="navigate(1)">Next →</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total  = slides.length;
+  let current  = 0;
+
+  function goTo(index) {
+    slides[current].classList.remove('active');
+    current = Math.max(0, Math.min(index, total - 1));
+    slides[current].classList.add('active');
+
+    document.getElementById('progress').style.width = ((current + 1) / total * 100) + '%';
+    document.getElementById('counter').textContent  = (current + 1) + ' / ' + total;
+
+    document.getElementById('btn-prev').disabled = current === 0;
+    const btnNext = document.getElementById('btn-next');
+    btnNext.disabled    = current === total - 1;
+    btnNext.textContent = current === total - 1 ? '✓ Done' : 'Next →';
+  }
+
+  function navigate(dir) { goTo(current + dir); }
+
+  document.addEventListener('keydown', e => {
+    if (['ArrowRight', 'ArrowDown', ' '].includes(e.key)) { e.preventDefault(); navigate(1); }
+    else if (['ArrowLeft', 'ArrowUp'].includes(e.key))    { e.preventDefault(); navigate(-1); }
+  });
+
+  // Init progress bar
+  goTo(0);
+</script>
+</body>
+</html>
