@@ -1,0 +1,19 @@
+
+intent: Build Payment Authorization API
+
+description: |
+  Demonstration intent artifact used to instruct AI systems
+  how a feature should be implemented.
+
+constraints:
+  language: Java
+  framework: Spring Boot
+  api_style: REST
+  security: OAuth2
+  latency_target: 200ms
+
+architecture:
+  components:
+    - controller
+    - service
+    - repository

@@ -1,0 +1,12 @@
+
+name: AI Code Review
+
+on:
+  pull_request:
+
+jobs:
+  ai-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run AI architecture check
+        run: echo "AI validation step placeholder"
