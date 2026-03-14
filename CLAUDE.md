@@ -1,4 +1,6 @@
-# CLAUDE.md — TeamBrain-Powered Project Memory
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 > This file is committed to git. Every developer and every Claude Code session inherits these standards automatically.
 
@@ -6,10 +8,46 @@
 
 ## Project Context
 
-**Type:** API / Backend  
-**Stack:** TypeScript / Node.js  
-**Team:** 2–5 developers  
+**Type:** Full-stack web application + intent-driven engineering framework
+**Stack:** TypeScript, Node.js (Express) backend + React (Vite) frontend
+**Team:** 2–5 developers
 **Reasoning Framework:** [TeamBrain](https://github.com/kendallmark3/TeamBrain)
+
+---
+
+## Repository Architecture
+
+This repo is both a **working full-stack application** (`app/`) and a **demonstration of intent-driven AI engineering practices**. Key directories:
+
+- `app/server/` — Express API (TypeScript, Zod validation, strict mode)
+- `app/client/` — React frontend (Vite, TypeScript strict)
+- `intent/` — Canonical intent documents; CI checks these exist and are non-empty
+- `.claude/commands/` — Custom slash command templates (`/intent-check`, `/arch-review`, `/review`)
+- `demo/` — Standalone starter projects showing framework patterns
+
+**Request flow:** Client fetches `/api/*` → Vite dev proxy → Express server on `:3001`. In production, the proxy is replaced by an env-configured base URL.
+
+**Intent documents are first-class:** `intent/architecture.intent.md` and `intent/constraints.md` define what the system does and does not do. Architectural changes require updating these files, not just the code.
+
+---
+
+## Development Commands
+
+```bash
+# Backend (app/server/)
+npm run dev        # tsx hot-reload on :3001
+npm run build      # tsc compile to dist/
+npm start          # run compiled dist/index.js
+
+# Frontend (app/client/)
+npm run dev        # Vite dev server on :5173 (proxies /api → :3001)
+npm run build      # tsc + vite build to dist/
+npm run preview    # preview production build
+```
+
+No test runner is configured yet. When adding tests, document the command here.
+
+---
 
 ---
 
