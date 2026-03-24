@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intent-Driven Integration POC</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem; color: #a78bfa; }
+    .subtitle { font-size: 0.85rem; color: #64748b; margin-bottom: 2rem; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }
+    .card {
+      background: #1e1e2e;
+      border: 1px solid #2d2d44;
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+    .card h2 { font-size: 0.9rem; font-weight: 600; color: #a78bfa; margin-bottom: 1rem; letter-spacing: 0.05em; text-transform: uppercase; }
+    label { display: block; font-size: 0.8rem; color: #94a3b8; margin-bottom: 0.35rem; }
+    select, input, textarea {
+      width: 100%;
+      background: #0f0f1a;
+      border: 1px solid #2d2d44;
+      border-radius: 8px;
+      color: #e2e8f0;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.85rem;
+      margin-bottom: 0.75rem;
+      font-family: inherit;
+    }
+    textarea { resize: vertical; min-height: 90px; font-family: "Menlo", monospace; font-size: 0.8rem; }
+    button {
+      background: #7c3aed;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.6rem 1.25rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.15s;
+    }
+    button:hover { background: #6d28d9; }
+    #status {
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      min-height: 1.2em;
+      color: #34d399;
+    }
+    #status.error { color: #f87171; }
+    .arch {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: #64748b;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .arch span { background: #2d2d44; border-radius: 6px; padding: 0.25rem 0.6rem; color: #a78bfa; }
+    .arch .arrow { color: #4b5563; }
+    #log { list-style: none; max-height: 340px; overflow-y: auto; }
+    #log li {
+      border-bottom: 1px solid #2d2d44;
+      padding: 0.6rem 0;
+      font-size: 0.78rem;
+    }
+    #log li:last-child { border-bottom: none; }
+    .tag {
+      display: inline-block;
+      border-radius: 4px;
+      padding: 0.1rem 0.4rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      margin-right: 0.4rem;
+    }
+    .tag-type { background: #3730a3; color: #a5b4fc; }
+    .tag-target { background: #065f46; color: #6ee7b7; }
+    .ts { color: #475569; margin-left: 0.25rem; font-size: 0.7rem; }
+    .empty { color: #475569; font-size: 0.8rem; padding: 1rem 0; text-align: center; }
+    .routing-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+    .routing-table th { text-align: left; color: #64748b; padding: 0.3rem 0; border-bottom: 1px solid #2d2d44; }
+    .routing-table td { padding: 0.4rem 0; border-bottom: 1px solid #1a1a2e; }
+    .routing-table td:last-child { color: #34d399; }
+  </style>
+</head>
+<body>
+  <h1>Intent-Driven Integration POC</h1>
+  <p class="subtitle">Inbound → Core → Routing → Event Bus → Outbound Adapters</p>
+
+  <div class="arch">
+    <span>REST Inbound</span><span class="arrow">→</span>
+    <span>Canonical Core</span><span class="arrow">→</span>
+    <span>Routing Rules</span><span class="arrow">→</span>
+    <span>Event Bus</span><span class="arrow">→</span>
+    <span>Outbound Fan-out</span>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Send Event</h2>
+      <label>Event Type</label>
+      <select id="eventType">
+        <option value="ProductOrderCreate">ProductOrderCreate → Salesforce, ServiceNow</option>
+        <option value="InventoryUpdate">InventoryUpdate → InventorySystem</option>
+        <option value="UnknownEvent">UnknownEvent → (no targets, dropped)</option>
+      </select>
+      <label>Payload (JSON)</label>
+      <textarea id="payload">{"id": 1, "name": "Demo Order"}</textarea>
+      <button onclick="sendEvent()">POST /event</button>
+      <div id="status"></div>
+    </div>
+
+    <div class="card">
+      <h2>Routing Rules</h2>
+      <table class="routing-table">
+        <thead><tr><th>Event Type</th><th>Targets</th></tr></thead>
+        <tbody>
+          <tr><td>ProductOrderCreate</td><td>Salesforce, ServiceNow</td></tr>
+          <tr><td>InventoryUpdate</td><td>InventorySystem</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card" style="grid-column: 1 / -1;">
+      <h2>Event Log <span style="color:#475569;font-size:0.7rem;font-weight:400;">(polls every 2s)</span></h2>
+      <ul id="log"><li class="empty">No events yet — send one above.</li></ul>
+    </div>
+  </div>
+
+  <script>
+    async function sendEvent() {
+      const eventType = document.getElementById('eventType').value;
+      const rawPayload = document.getElementById('payload').value;
+      const status = document.getElementById('status');
+      status.className = '';
+      let payload;
+      try { payload = JSON.parse(rawPayload); }
+      catch { status.textContent = 'Invalid JSON in payload.'; status.className = 'error'; return; }
+
+      try {
+        const res = await fetch('/event', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ eventType, payload })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          status.textContent = `Accepted: ${data.eventType}`;
+          fetchEvents();
+        } else {
+          status.textContent = `Error: ${JSON.stringify(data.error)}`;
+          status.className = 'error';
+        }
+      } catch (e) {
+        status.textContent = 'Network error — is the server running?';
+        status.className = 'error';
+      }
+    }
+
+    async function fetchEvents() {
+      try {
+        const res = await fetch('/events');
+        const events = await res.json();
+        const log = document.getElementById('log');
+        if (!events.length) {
+          log.innerHTML = '<li class="empty">No events yet — send one above.</li>';
+          return;
+        }
+        log.innerHTML = [...events].reverse().map(e => `
+          <li>
+            <span class="tag tag-type">${e.eventType}</span>
+            <span class="ts">${new Date(e.timestamp).toLocaleTimeString()}</span>
+            <br style="margin-bottom:0.25rem"/>
+            ${Object.entries(e.payload).map(([k,v]) => `<span style="color:#94a3b8">${k}:</span> <span style="color:#e2e8f0">${v}</span>`).join(' &nbsp;')}
+          </li>`).join('');
+      } catch {}
+    }
+
+    fetchEvents();
+    setInterval(fetchEvents, 2000);
+  </script>
+</body>
+</html>

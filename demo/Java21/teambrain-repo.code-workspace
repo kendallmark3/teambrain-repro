@@ -1,0 +1,29 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../../ai-enterprise-engineering-starter"
+		},
+		{
+			"path": "../../../../ai-enterprise-engineering-starter/automation"
+		},
+		{
+			"path": "../../../../ai-enterprise-engineering-starter/execution"
+		},
+		{
+			"path": "../../../../ai-enterprise-engineering-starter/agents"
+		},
+		{
+			"path": "../../../../ai-enterprise-engineering-starter/context"
+		},
+		{
+			"path": "../../../../ai-enterprise-engineering-starter/intent"
+		},
+		{
+			"path": "../../.."
+		}
+	],
+	"settings": {}
+}
