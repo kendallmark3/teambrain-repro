@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TeamBrain: Intent-Driven Development with Claude — Team Onboarding Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  :root {
+    --navy: #0f2544;
+    --blue: #1B4F8A;
+    --blue-light: #e8f0fb;
+    --green: #1b6b3a;
+    --green-light: #e6f4ec;
+    --orange: #c04a00;
+    --orange-light: #fff0e6;
+    --ink: #1a1a2e;
+    --muted: #5a6478;
+    --rule: #d8dde8;
+    --bg: #f8f9fc;
+    --white: #ffffff;
+    --code-bg: #0d1117;
+    --code-fg: #c9d1d9;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--ink);
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── ARTICLE WRAPPER ─── */
+  .article {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: var(--navy);
+    margin: 0 -24px 60px;
+    padding: 72px 48px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.025);
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: #7eb8f7;
+  }
+  .hero-sub {
+    font-size: 18px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.65);
+    max-width: 560px;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-meta {
+    margin-top: 36px;
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-meta span {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.06em;
+  }
+  .hero-meta span strong {
+    color: rgba(255,255,255,0.75);
+    font-weight: 600;
+  }
+
+  /* ─── SECTION HEADERS ─── */
+  .section-number {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--blue);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+  }
+  h2 {
+    font-family: var(--serif);
+    font-size: 34px;
+    font-weight: 400;
+    color: var(--navy);
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  h3 {
+    font-family: var(--sans);
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--navy);
+    margin: 40px 0 14px;
+    letter-spacing: -0.01em;
+  }
+  h4 {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 32px 0 10px;
+  }
+
+  /* ─── BODY TEXT ─── */
+  p {
+    color: #2d3554;
+    margin-bottom: 18px;
+    font-weight: 300;
+  }
+  p + p { margin-top: -4px; }
+
+  /* ─── SECTION DIVIDERS ─── */
+  .section {
+    margin-bottom: 72px;
+    padding-top: 56px;
+    border-top: 1px solid var(--rule);
+  }
+  .section:first-of-type {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  /* ─── PRINCIPLE BOX ─── */
+  .principle {
+    background: var(--navy);
+    border-radius: 4px;
+    padding: 36px 40px;
+    margin: 36px 0;
+  }
+  .principle p {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-style: italic;
+    color: #7eb8f7;
+    line-height: 1.5;
+    margin: 0;
+    text-align: center;
+  }
+
+  /* ─── CALLOUT BOXES ─── */
+  .callout {
+    border-left: 3px solid var(--blue);
+    background: var(--blue-light);
+    border-radius: 0 6px 6px 0;
+    padding: 20px 24px;
+    margin: 28px 0;
+  }
+  .callout.green {
+    border-color: var(--green);
+    background: var(--green-light);
+  }
+  .callout.orange {
+    border-color: var(--orange);
+    background: var(--orange-light);
+  }
+  .callout-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 8px;
+  }
+  .callout.green .callout-label { color: var(--green); }
+  .callout.orange .callout-label { color: var(--orange); }
+  .callout p {
+    font-size: 15px;
+    margin: 0;
+    color: var(--ink);
+    font-weight: 400;
+  }
+  .callout p + p { margin-top: 6px; }
+
+  /* ─── TABLES ─── */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 28px 0;
+    border-radius: 8px;
+    border: 1px solid var(--rule);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14.5px;
+    min-width: 500px;
+  }
+  thead tr {
+    background: var(--navy);
+  }
+  thead th {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    padding: 14px 16px;
+    text-align: left;
+    white-space: nowrap;
+  }
+  tbody tr:nth-child(odd) { background: var(--white); }
+  tbody tr:nth-child(even) { background: var(--bg); }
+  tbody tr:hover { background: var(--blue-light); }
+  td {
+    padding: 12px 16px;
+    color: #2d3554;
+    vertical-align: top;
+    border-bottom: 1px solid var(--rule);
+    line-height: 1.55;
+    font-weight: 300;
+  }
+  td:first-child {
+    font-weight: 500;
+    white-space: nowrap;
+    color: var(--navy);
+  }
+  tbody tr:last-child td { border-bottom: none; }
+
+  /* ─── CODE BLOCKS ─── */
+  pre {
+    background: var(--code-bg);
+    border-radius: 8px;
+    padding: 24px 28px;
+    overflow-x: auto;
+    margin: 24px 0;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  code {
+    font-family: var(--mono);
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--code-fg);
+  }
+  p code, li code {
+    background: rgba(27,79,138,0.1);
+    color: var(--blue);
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 13px;
+  }
+
+  /* ─── LISTS ─── */
+  ul, ol {
+    padding-left: 24px;
+    margin: 12px 0 20px;
+  }
+  li {
+    margin-bottom: 8px;
+    color: #2d3554;
+    font-weight: 300;
+    line-height: 1.65;
+  }
+  li::marker { color: var(--blue); font-weight: 600; }
+  ol li::marker { font-family: var(--mono); font-size: 13px; }
+
+  /* ─── PHASE CARDS ─── */
+  .phase-grid {
+    display: grid;
+    gap: 16px;
+    margin: 32px 0;
+  }
+  .phase-card {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--rule);
+  }
+  .phase-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-size: 36px;
+    color: var(--white);
+  }
+  .phase-card.p1 .phase-number { background: var(--navy); }
+  .phase-card.p2 .phase-number { background: var(--orange); }
+  .phase-card.p3 .phase-number { background: #1565c0; }
+  .phase-card.p4 .phase-number { background: var(--green); }
+  .phase-body {
+    padding: 18px 22px;
+    background: var(--bg);
+  }
+  .phase-title {
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--navy);
+    margin-bottom: 2px;
+  }
+  .phase-sub {
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* ─── LOOP DIAGRAM ─── */
+  .loop {
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin: 28px 0;
+    text-align: center;
+  }
+  .loop-steps {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+    letter-spacing: 0.02em;
+    line-height: 2;
+  }
+  .loop-steps .arrow { color: var(--blue); margin: 0 6px; }
+  .loop-note {
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* ─── READING ORDER ─── */
+  .reading-list {
+    counter-reset: reading;
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+  }
+  .reading-list li {
+    counter-increment: reading;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .reading-list li:last-child { border-bottom: none; }
+  .reading-list li::before {
+    content: counter(reading, decimal-leading-zero);
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--blue);
+    min-width: 24px;
+  }
+  .reading-list .file {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--navy);
+    font-weight: 600;
+    min-width: 220px;
+  }
+  .reading-list .desc {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ─── NON-NEGOTIABLES ─── */
+  .rules-grid {
+    display: grid;
+    gap: 12px;
+    margin: 24px 0;
+  }
+  .rule-card {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 0;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--rule);
+  }
+  .rule-num {
+    background: var(--blue);
+    color: white;
+    font-family: var(--mono);
+    font-size: 15px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .rule-body { padding: 14px 18px; background: var(--bg); }
+  .rule-title { font-weight: 600; color: var(--navy); font-size: 15px; margin-bottom: 2px; }
+  .rule-desc { font-size: 13.5px; color: var(--muted); font-weight: 300; }
+
+  /* ─── CLOSING CTA ─── */
+  .closing {
+    background: var(--navy);
+    border-radius: 8px;
+    padding: 48px 44px;
+    text-align: center;
+    margin-top: 64px;
+  }
+  .closing h2 {
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+  .closing p {
+    color: rgba(255,255,255,0.55);
+    max-width: 480px;
+    margin: 0 auto;
+    font-size: 16px;
+  }
+  .closing .quote {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-style: italic;
+    color: #7eb8f7;
+    margin: 20px 0 8px;
+    display: block;
+  }
+
+  /* ─── INLINE BADGES ─── */
+  .badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 3px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .badge-l1 { background: #e3f2fd; color: #0d47a1; }
+  .badge-l2 { background: #e8f5e9; color: #1b5e20; }
+  .badge-l3 { background: #fff3e0; color: #e65100; }
+  .badge-l4 { background: #fce4ec; color: #880e4f; }
+  .badge-l5 { background: #f3e5f5; color: #4a148c; }
+  .badge-l6 { background: #fff8e1; color: #f57f17; }
+</style>
+</head>
+<body>
+<article class="article">
+
+  <!-- ═══════════════════════════════════════ HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">TeamBrain · Team Onboarding Guide</div>
+    <h1>Intent-Driven Development<br><em>with Claude</em></h1>
+    <p class="hero-sub">From Zero to Intent-Driven in 4 Phases — based on the <code style="background:rgba(255,255,255,0.1);padding:2px 8px;border-radius:4px;font-size:14px;">teambrain-repro</code> repository.</p>
+    <div class="hero-meta">
+      <span><strong>Audience:</strong> Engineering &amp; Product Teams</span>
+      <span><strong>Time:</strong> 2–3 Weeks</span>
+      <span><strong>Phases:</strong> 4</span>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════ SECTION 1 -->
+  <div class="section">
+    <span class="section-number">Section 01</span>
+    <h2>What Is Intent-Driven Development?</h2>
+
+    <p>Before you touch a single file in the repository, you need to understand the core mental shift. Intent-driven development is not about learning a framework — it is about changing how you think <em>before</em> you write a single line of code.</p>
+
+    <h3>The Old Way vs. The Intent Way</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>The Old Way</th><th>The Intent Way</th></tr></thead>
+        <tbody>
+          <tr><td>Start by opening your IDE</td><td>Start by writing what you want in plain language</td></tr>
+          <tr><td>Write code, then figure out structure</td><td>Write the outcome, then let structure emerge from it</td></tr>
+          <tr><td>Design and implementation are separate documents</td><td>Intent IS the design — code is generated from it</td></tr>
+          <tr><td>Specs drift from code over time</td><td>Intent stays in sync — it IS the source of truth</td></tr>
+          <tr><td>Ramp-up = learning the codebase</td><td>Ramp-up = learning to describe outcomes precisely</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>The One-Line Principle</h3>
+    <p>Every file in the teambrain-repro repository follows a single principle:</p>
+
+    <div class="principle">
+      <p>"Describe what you want once → everything else aligns automatically."</p>
+    </div>
+
+    <p>This means:</p>
+    <ul>
+      <li>Intent files are not documentation — they are <strong>source code for your system</strong></li>
+      <li>Claude is not a tool you use — it is the <strong>execution engine</strong></li>
+      <li>Your job shifts from writing code to <strong>writing precise intent</strong></li>
+      <li>Governance, architecture, security, and testing are all defined as intent — not enforced manually</li>
+    </ul>
+
+    <div class="callout">
+      <div class="callout-label">💡 Why This Changes Everything for Teams</div>
+      <p>Traditional teams spend enormous energy on alignment: sprint planning, PRD reviews, architecture reviews, code reviews. Intent-driven teams encode alignment directly into the system. When intent is clear, Claude generates consistent, standards-compliant code — every time.</p>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════ SECTION 2 -->
+  <div class="section">
+    <span class="section-number">Section 02</span>
+    <h2>The Repository: Your Learning Map</h2>
+
+    <p>The teambrain-repro repository is not just a codebase — it is a living curriculum. Every folder and file teaches a different dimension of the intent-driven system.</p>
+
+    <h3>The Six Layers</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Layer</th><th>Files / Folders</th><th>What It Teaches</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-l1">L1</span> Execution</td>
+            <td><code>intentapi.md</code>, <code>intentdice.md</code>, <code>payment-api-intent.yaml</code></td>
+            <td>How to describe a concrete output so Claude can build it</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-l2">L2</span> System</td>
+            <td><code>architecture.intent.md</code>, <code>devops.intent.md</code>, <code>security.intent.md</code>, <code>testing.intent.md</code></td>
+            <td>Standards and constraints that apply across all generated code</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-l3">L3</span> Agent</td>
+            <td><code>pythomagentintent.md</code>, <code>teambrain-agent/intent.md</code></td>
+            <td>How to make Claude operate autonomously as a persistent agent</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-l4">L4</span> Governance</td>
+            <td><code>.claude/commands/intent-check.md</code></td>
+            <td>How to enforce discipline — validate intent before any code is generated</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-l5">L5</span> Demo</td>
+            <td><code>jennyintent.md</code>, <code>intentdemo/intent.md</code></td>
+            <td>End-to-end examples showing the full workflow from intent to output</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-l6">L6</span> Infra</td>
+            <td><code>infra/intent-aligned-architecture.md</code></td>
+            <td>How intent-driven principles scale to cloud and enterprise architecture</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Start Here: Two Files Every New Team Member Must Read First</h3>
+
+    <div class="callout">
+      <div class="callout-label">📄 File 1 — jennyintent.md (Demo / Narrative Intent)</div>
+      <p>The simplest example in the entire repo. It shows a single, clean, human-readable intent being passed to Claude and generating a structured output.</p>
+      <p><strong>What to look for:</strong> How is the intent written? What level of detail is included? Notice that the intent reads almost like a memo, not a spec.</p>
+    </div>
+
+    <div class="callout orange">
+      <div class="callout-label">📄 File 2 — .claude/commands/intent-check.md (Governance Intent)</div>
+      <p>The most important file for team discipline. It defines the rule: <strong>do not generate code until intent has been validated.</strong></p>
+      <p><strong>What to look for:</strong> What questions does intent-check ask? This file is your quality gate — every sprint starts here.</p>
+    </div>
+
+    <h3>Recommended Reading Order</h3>
+    <ol class="reading-list">
+      <li><span class="file">jennyintent.md</span><span class="desc">Understand the simplest possible intent</span></li>
+      <li><span class="file">.claude/commands/intent-check.md</span><span class="desc">Understand the governance gate</span></li>
+      <li><span class="file">intentdemo/intent.md</span><span class="desc">See a full end-to-end demo workflow</span></li>
+      <li><span class="file">demo/intentdice.md</span><span class="desc">Understand a UI/App execution intent</span></li>
+      <li><span class="file">demo/intentapi.md</span><span class="desc">Understand an API execution intent</span></li>
+      <li><span class="file">intent/architecture.intent.md</span><span class="desc">Understand how architecture is declared as intent</span></li>
+      <li><span class="file">demo/devops.intent.md + security.intent.md</span><span class="desc">See system-level intents</span></li>
+      <li><span class="file">pythomagentintent.md</span><span class="desc">Understand agent behavior intent</span></li>
+      <li><span class="file">teambrain-agent/intent.md</span><span class="desc">See the full TeamBrain agent system</span></li>
+      <li><span class="file">infra/intent-aligned-architecture.md</span><span class="desc">Enterprise-scale intent architecture</span></li>
+    </ol>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════ SECTION 3 -->
+  <div class="section">
+    <span class="section-number">Section 03</span>
+    <h2>How Claude Works in This System</h2>
+
+    <p>Many teams make the mistake of treating Claude like a search engine or smarter autocomplete. In the TeamBrain system, Claude plays three distinct roles.</p>
+
+    <h3>Claude's Three Roles</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Role</th><th>What Claude Is Doing</th><th>Driven By</th></tr></thead>
+        <tbody>
+          <tr><td>Generator</td><td>Taking a declarative intent file and producing code, APIs, or UI components</td><td><code>intentapi.md</code>, <code>intentdice.md</code></td></tr>
+          <tr><td>Enforcer</td><td>Validating that intent is complete and clear before any generation begins</td><td><code>intent-check.md</code></td></tr>
+          <tr><td>Agent</td><td>Operating autonomously across multiple tasks, maintaining context, running workflows</td><td><code>teambrain-agent/intent.md</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>The Generation Loop</h3>
+    <p>Every interaction with Claude in this system follows the same loop. Burn this into your team's muscle memory:</p>
+
+    <div class="loop">
+      <div class="loop-steps">
+        <span>① Write Intent</span>
+        <span class="arrow">→</span>
+        <span>② Run Intent-Check</span>
+        <span class="arrow">→</span>
+        <span>③ Feed to Claude</span>
+        <span class="arrow">→</span>
+        <span>④ Review Output</span>
+        <span class="arrow">→</span>
+        <span>⑤ Refine Intent</span>
+      </div>
+      <div class="loop-note">Repeat until output matches intent. The intent file — not the generated code — is what you version-control.</div>
+    </div>
+
+    <h3>What Claude Needs to Generate Good Code</h3>
+    <p>Claude performs best when intent files are specific on four dimensions:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Dimension</th><th>Poor Intent</th><th>Strong Intent</th></tr></thead>
+        <tbody>
+          <tr><td>Purpose</td><td>"Build an API"</td><td>"Build a RESTful customer management API with CRUD operations, JWT auth, and Node.js"</td></tr>
+          <tr><td>Constraints</td><td>(none stated)</td><td>"Follow the architecture.intent.md standards — layered controller/service pattern"</td></tr>
+          <tr><td>Technology</td><td>"Use modern tools"</td><td>"Node.js 20, Express 4, PostgreSQL, deployed via the devops.intent.md pipeline"</td></tr>
+          <tr><td>Acceptance</td><td>"Make it work"</td><td>"All endpoints return standard error shapes; 90% test coverage per testing.intent.md"</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>The YAML Intent Format</h3>
+    <p>Some files use YAML for machine-readable intent — useful for agent workflows:</p>
+    <pre><code>intent: Payment Authorization API
+version: 1.0
+owner: payments-team
+
+purpose: Authorize payment transactions with fraud detection
+
+constraints:
+  - follows: architecture.intent.md
+  - follows: security.intent.md
+  - follows: testing.intent.md
+
+technology:
+  runtime: Node.js 20
+  framework: Express
+  database: PostgreSQL
+
+acceptance:
+  - All transactions logged with correlation IDs
+  - 95%+ test coverage
+  - PCI-DSS compliant error handling</code></pre>
+
+    <div class="callout green">
+      <div class="callout-label">💡 Key Insight: Intent Inheritance</div>
+      <p>Notice the <code>follows</code> keys above. This is <strong>intent inheritance</strong> — the payment API does not redefine security or architecture rules. It references system-level intents and inherits all their standards. This is how TeamBrain ensures consistency across all generated code without repeating constraints in every intent file.</p>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════ SECTION 4 -->
+  <div class="section">
+    <span class="section-number">Section 04</span>
+    <h2>The 4-Phase Learning Journey</h2>
+
+    <p>This is the recommended onboarding path for any new team member. Do not skip phases — each one builds on the mental models of the previous one. Estimated total time: <strong>2–3 weeks</strong>.</p>
+
+    <div class="phase-grid">
+      <div class="phase-card p1">
+        <div class="phase-number">1</div>
+        <div class="phase-body">
+          <div class="phase-title">Read &amp; Orient — Days 1–2</div>
+          <div class="phase-sub">Understand the system before you touch anything</div>
+        </div>
+      </div>
+      <div class="phase-card p2">
+        <div class="phase-number">2</div>
+        <div class="phase-body">
+          <div class="phase-title">Run a Demo — Days 3–5</div>
+          <div class="phase-sub">See the system produce real output end-to-end</div>
+        </div>
+      </div>
+      <div class="phase-card p3">
+        <div class="phase-number">3</div>
+        <div class="phase-body">
+          <div class="phase-title">Write an Intent — Days 6–10</div>
+          <div class="phase-sub">Author your first intent file from scratch</div>
+        </div>
+      </div>
+      <div class="phase-card p4">
+        <div class="phase-number">4</div>
+        <div class="phase-body">
+          <div class="phase-title">Contribute &amp; Systematize — Days 11–15</div>
+          <div class="phase-sub">Extend the system and establish team patterns</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Phase 1 — Read &amp; Orient</h3>
+    <ul>
+      <li>Clone the repo and read <code>TableOfContents.md</code> in full</li>
+      <li>Read the six intent files in the recommended reading order — do not generate code yet</li>
+      <li>For each file, write a 1-sentence answer: "What outcome does this intent produce?"</li>
+      <li>Map the files mentally to the L1–L6 layers</li>
+    </ul>
+    <div class="callout green">
+      <div class="callout-label">✅ Exit Criteria</div>
+      <p>You can explain the difference between an Execution Intent and a System Intent. You can explain why <code>intent-check.md</code> is the most important file. You can describe the Generation Loop in your own words.</p>
+    </div>
+
+    <h3>Phase 2 — Run a Demo</h3>
+    <ul>
+      <li>Open <code>intentdemo/intent.md</code> and read it carefully</li>
+      <li>Run <code>intent-check.md</code> against it — does the intent pass all governance checks?</li>
+      <li>Feed the intent to Claude exactly as written — no modifications</li>
+      <li>Review the output: does it match the intent?</li>
+      <li>Modify one thing in the intent and re-run — observe how output changes</li>
+      <li>Repeat with <code>intentdice.md</code> (UI) and <code>intentapi.md</code> (backend)</li>
+    </ul>
+    <div class="callout green">
+      <div class="callout-label">✅ Exit Criteria</div>
+      <p>You have run at least 3 intent files through Claude. You have intentionally broken an intent and observed Claude struggling. You understand that intent specificity directly controls output quality.</p>
+    </div>
+
+    <h3>Phase 3 — Write an Intent</h3>
+    <ul>
+      <li>Pick a small, real task from your current work</li>
+      <li>Write the intent file in Markdown — <strong>do not open your IDE yet</strong></li>
+      <li>Run your intent through <code>intent-check.md</code> — answer every governance question</li>
+      <li>Feed it to Claude and evaluate the output against your intent</li>
+      <li>Refine the intent (not the code) until the output is correct</li>
+    </ul>
+    <div class="callout orange">
+      <div class="callout-label">⚠️ Common Mistake at Phase 3</div>
+      <p>New team members often start fixing the generated code directly when it is wrong. <strong>Do not do this.</strong> If the output is wrong, the intent is wrong. Go back and fix the intent. This discipline is what separates intent-driven teams from teams that just use AI as autocomplete.</p>
+    </div>
+    <div class="callout green">
+      <div class="callout-label">✅ Exit Criteria</div>
+      <p>You have authored one intent file that produces correct, standards-compliant output. You have not manually edited any generated code. Your intent references the appropriate system intents.</p>
+    </div>
+
+    <h3>Phase 4 — Contribute &amp; Systematize</h3>
+    <ul>
+      <li>Use intent-driven development for your next real feature or task</li>
+      <li>If a system intent is missing, write one and submit it as a PR</li>
+      <li>Review a teammate's intent file the way you would review code</li>
+      <li>Explore <code>teambrain-agent/intent.md</code> to understand autonomous agent intents</li>
+    </ul>
+    <div class="callout green">
+      <div class="callout-label">✅ Exit Criteria</div>
+      <p>You have used intent-driven development on a real production task. You have reviewed at least one colleague's intent file. You can explain the difference between a one-shot intent and an agent intent.</p>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════ SECTION 5 -->
+  <div class="section">
+    <span class="section-number">Section 05</span>
+    <h2>Team Practices &amp; Operating Rules</h2>
+
+    <h3>The Five Non-Negotiables</h3>
+    <div class="rules-grid">
+      <div class="rule-card">
+        <div class="rule-num">1</div>
+        <div class="rule-body">
+          <div class="rule-title">Intent before code — always</div>
+          <div class="rule-desc">If there is no intent file, there is no work. This prevents scope creep and misalignment.</div>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-num">2</div>
+        <div class="rule-body">
+          <div class="rule-title">Fix intent, not output</div>
+          <div class="rule-desc">Editing generated code directly is technical debt disguised as productivity. The intent is the source of truth.</div>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-num">3</div>
+        <div class="rule-body">
+          <div class="rule-title">Intent-check is mandatory, not optional</div>
+          <div class="rule-desc">Skipping intent-check is like skipping code review. Governance exists for a reason.</div>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-num">4</div>
+        <div class="rule-body">
+          <div class="rule-title">System intents are team contracts</div>
+          <div class="rule-desc">architecture.intent.md, security.intent.md, etc. are binding. No execution intent overrides them.</div>
+        </div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-num">5</div>
+        <div class="rule-body">
+          <div class="rule-title">Intent files live in version control</div>
+          <div class="rule-desc">Intent is code. It gets committed, reviewed, and versioned exactly like source files.</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Sprint Workflow Integration</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Sprint Event</th><th>Intent-Driven Practice</th></tr></thead>
+        <tbody>
+          <tr><td>Sprint Planning</td><td>For each story, write a draft intent file. If you cannot write an intent, the story is not ready.</td></tr>
+          <tr><td>Refinement</td><td>Run <code>intent-check.md</code> on each intent. Resolve ambiguities before the sprint starts.</td></tr>
+          <tr><td>Development</td><td>Feed intent to Claude, review output, refine intent, repeat. No manual code editing.</td></tr>
+          <tr><td>Code Review</td><td>Review the intent file, not just the generated code. Does the intent reflect what was built?</td></tr>
+          <tr><td>Retrospective</td><td>Which intents were hard to write? Which system intents need updating?</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Intent Review Checklist</h3>
+    <ul>
+      <li>Is the purpose stated in one clear sentence?</li>
+      <li>Are all technology choices explicit (language, framework, version)?</li>
+      <li>Are the appropriate system intents referenced?</li>
+      <li>Are acceptance criteria defined — how will you know the output is correct?</li>
+      <li>Are there any ambiguous terms Claude could interpret multiple ways?</li>
+      <li>Does the scope feel right — not too large for one generation cycle?</li>
+      <li>Has <code>intent-check.md</code> been run and passed?</li>
+    </ul>
+
+    <h3>When Intent-Driven Development Is Hard</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Situation</th><th>What To Do</th></tr></thead>
+        <tbody>
+          <tr><td>"I don't know what I want yet"</td><td>Write an exploratory intent. Ask Claude to help you discover options. Discovery is valid intent.</td></tr>
+          <tr><td>"It's a tiny change — 5 lines"</td><td>Still write intent. Even small changes should be traceable. It takes 2 minutes.</td></tr>
+          <tr><td>"The generated code is almost right but has one bug"</td><td>Fix the intent, not the bug. Add a constraint like "must handle null values in X field".</td></tr>
+          <tr><td>"Claude keeps misunderstanding me"</td><td>Your intent is ambiguous. Add an example (input/output pair) to the intent file.</td></tr>
+          <tr><td>"We don't have a system intent for this domain"</td><td>Write one. This is a contribution to the team — not a blocker.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════ SECTION 6 -->
+  <div class="section">
+    <span class="section-number">Section 06</span>
+    <h2>Quick Reference</h2>
+
+    <h3>Intent File Anatomy</h3>
+    <pre><code># Intent: [Name of the thing you want to build]
+
+## Purpose
+[One sentence: what does this produce and why does it exist?]
+
+## Technology
+- Runtime: [e.g., Node.js 20]
+- Framework: [e.g., Express 4]
+- Database: [e.g., PostgreSQL 15]
+
+## Constraints
+- Follows: architecture.intent.md
+- Follows: security.intent.md
+- Follows: testing.intent.md
+
+## Behavior
+[Describe what the system does. Be specific. Use examples if helpful.]
+
+## Acceptance Criteria
+- [Criterion 1: measurable, specific]
+- [Criterion 2: measurable, specific]</code></pre>
+
+    <h3>Glossary</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+        <tbody>
+          <tr><td>Intent File</td><td>A Markdown or YAML file that declaratively describes the desired outcome of a system or component.</td></tr>
+          <tr><td>Execution Intent</td><td>An intent that produces a concrete artifact — code, API, UI, or feature.</td></tr>
+          <tr><td>System Intent</td><td>An intent that defines standards and constraints applied across all execution intents.</td></tr>
+          <tr><td>Agent Intent</td><td>An intent that defines autonomous, multi-step behavior for an AI agent.</td></tr>
+          <tr><td>Governance Intent</td><td>An intent that validates other intents before execution begins.</td></tr>
+          <tr><td>Intent Inheritance</td><td>When an execution intent references a system intent using "follows:", inheriting all its constraints.</td></tr>
+          <tr><td>Intent-Check</td><td>The governance validation step that must pass before Claude generates any output.</td></tr>
+          <tr><td>Generation Loop</td><td>Write Intent → Intent-Check → Feed to Claude → Review → Refine Intent. Repeat.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════ SECTION 7 -->
+  <div class="section">
+    <span class="section-number">Section 07</span>
+    <h2>What Comes Next</h2>
+
+    <h3>Near-Term Team Milestones</h3>
+    <ul>
+      <li>Establish your team's base system intents if they don't exist: <code>frontend.intent.md</code>, <code>data.intent.md</code>, etc.</li>
+      <li>Add an intent-check step to your CI/CD pipeline — automate governance</li>
+      <li>Create a team intent library: reusable patterns your team reaches for repeatedly</li>
+      <li>Track which intents produce the best first-pass outputs — learn from the data</li>
+    </ul>
+
+    <h3>The Meta-Intent Layer (Advanced)</h3>
+    <p>The next evolution is a meta-intent layer — a single file that composes all system intents into a unified enterprise blueprint:</p>
+    <pre><code>intent: Build Enterprise System
+includes:
+  - architecture.intent.md
+  - security.intent.md
+  - devops.intent.md
+  - frontend.intent.md
+  - testing.intent.md</code></pre>
+    <p>This becomes your organization's <strong>engineering operating system</strong> — expressed entirely as intent.</p>
+
+    <h3>From Intent to Autonomous Engineering</h3>
+    <p>The <code>teambrain-agent/intent.md</code> files point toward the ultimate direction: an AI agent that reads intent files, executes them, monitors results, and iterates — without developer involvement for routine work. Your team's job becomes writing and maintaining intent, not writing code.</p>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════ CLOSING -->
+  <div class="closing">
+    <h2>The Goal</h2>
+    <span class="quote">"Engineers who write excellent intent are more valuable than engineers who write excellent code."</span>
+    <p>This repository is your training ground for that future. Start with Phase 1 today.</p>
+  </div>
+
+</article>
+</body>
+</html>
