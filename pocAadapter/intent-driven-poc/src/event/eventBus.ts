@@ -23,3 +23,13 @@ export const publish = (event: RoutedEvent): void => {
 export const subscribe = (handler: Handler): void => {
   subscribers.push(handler);
 };
+
+/**
+ * resetSubscribers — clears all registered handlers.
+ * Exists solely for test isolation: the module-level subscribers array persists
+ * across test files in Jest's module cache, causing handlers to accumulate and
+ * produce duplicate side-effects. Call this in beforeEach when testing bus behaviour.
+ */
+export const resetSubscribers = (): void => {
+  subscribers.length = 0;
+};

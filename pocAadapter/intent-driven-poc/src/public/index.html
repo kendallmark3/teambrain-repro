@@ -68,11 +68,12 @@
     }
     .arch span { background: #2d2d44; border-radius: 6px; padding: 0.25rem 0.6rem; color: #a78bfa; }
     .arch .arrow { color: #4b5563; }
-    #log { list-style: none; max-height: 340px; overflow-y: auto; }
+    #log { list-style: none; max-height: 420px; overflow-y: auto; }
     #log li {
       border-bottom: 1px solid #2d2d44;
-      padding: 0.6rem 0;
+      padding: 0.65rem 0;
       font-size: 0.78rem;
+      line-height: 1.6;
     }
     #log li:last-child { border-bottom: none; }
     .tag {
@@ -83,9 +84,14 @@
       font-weight: 700;
       margin-right: 0.4rem;
     }
-    .tag-type { background: #3730a3; color: #a5b4fc; }
-    .tag-target { background: #065f46; color: #6ee7b7; }
-    .ts { color: #475569; margin-left: 0.25rem; font-size: 0.7rem; }
+    .tag-type    { background: #3730a3; color: #a5b4fc; }
+    .tag-routed  { background: #065f46; color: #6ee7b7; }
+    .tag-dropped { background: #78350f; color: #fcd34d; }
+    .tag-rejected{ background: #7f1d1d; color: #fca5a5; }
+    .tag-target  { background: #1e3a5f; color: #93c5fd; font-weight: 400; }
+    .ts { color: #475569; font-size: 0.7rem; }
+    .log-targets { margin-top: 0.2rem; }
+    .log-payload { color: #64748b; font-size: 0.72rem; font-family: "Menlo", monospace; margin-top: 0.15rem; }
     .empty { color: #475569; font-size: 0.8rem; padding: 1rem 0; text-align: center; }
     .routing-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
     .routing-table th { text-align: left; color: #64748b; padding: 0.3rem 0; border-bottom: 1px solid #2d2d44; }
@@ -132,8 +138,8 @@
     </div>
 
     <div class="card" style="grid-column: 1 / -1;">
-      <h2>Event Log <span style="color:#475569;font-size:0.7rem;font-weight:400;">(polls every 2s)</span></h2>
-      <ul id="log"><li class="empty">No events yet — send one above.</li></ul>
+      <h2>Inbound Call Log <span style="color:#475569;font-size:0.7rem;font-weight:400;">(updates after each POST)</span></h2>
+      <ul id="log"><li class="empty">No calls yet — send an event above.</li></ul>
     </div>
   </div>
 
@@ -141,11 +147,11 @@
     async function sendEvent() {
       const eventType = document.getElementById('eventType').value;
       const rawPayload = document.getElementById('payload').value;
-      const status = document.getElementById('status');
-      status.className = '';
+      const statusEl = document.getElementById('status');
+      statusEl.className = '';
       let payload;
       try { payload = JSON.parse(rawPayload); }
-      catch { status.textContent = 'Invalid JSON in payload.'; status.className = 'error'; return; }
+      catch { statusEl.textContent = 'Invalid JSON in payload.'; statusEl.className = 'error'; return; }
 
       try {
         const res = await fetch('/event', {
@@ -155,39 +161,55 @@
         });
         const data = await res.json();
         if (res.ok) {
-          status.textContent = `Accepted: ${data.eventType}`;
-          fetchEvents();
+          statusEl.textContent = `Accepted: ${data.eventType}`;
+          await fetchLog();
         } else {
-          status.textContent = `Error: ${JSON.stringify(data.error)}`;
-          status.className = 'error';
+          statusEl.textContent = `Error: ${JSON.stringify(data.error)}`;
+          statusEl.className = 'error';
+          await fetchLog();
         }
       } catch (e) {
-        status.textContent = 'Network error — is the server running?';
-        status.className = 'error';
+        statusEl.textContent = 'Network error — is the server running?';
+        statusEl.className = 'error';
       }
     }
 
-    async function fetchEvents() {
+    function statusTag(s) {
+      if (s === 'routed')   return '<span class="tag tag-routed">ROUTED</span>';
+      if (s === 'dropped')  return '<span class="tag tag-dropped">DROPPED</span>';
+      if (s === 'rejected') return '<span class="tag tag-rejected">REJECTED</span>';
+      return `<span class="tag">${s}</span>`;
+    }
+
+    async function fetchLog() {
       try {
-        const res = await fetch('/events');
-        const events = await res.json();
+        const res = await fetch('/log');
+        const entries = await res.json();
         const log = document.getElementById('log');
-        if (!events.length) {
-          log.innerHTML = '<li class="empty">No events yet — send one above.</li>';
+        if (!entries.length) {
+          log.innerHTML = '<li class="empty">No calls yet — send an event above.</li>';
           return;
         }
-        log.innerHTML = [...events].reverse().map(e => `
-          <li>
-            <span class="tag tag-type">${e.eventType}</span>
+        log.innerHTML = [...entries].reverse().map(e => {
+          const targets = e.targets && e.targets.length
+            ? e.targets.map(t => `<span class="tag tag-target">${t}</span>`).join(' ')
+            : '<span style="color:#475569">none</span>';
+          const payloadStr = e.payload
+            ? Object.entries(e.payload).map(([k,v]) => `<span style="color:#94a3b8">${k}:</span> ${v}`).join('  ')
+            : e.validationError ? `<span style="color:#f87171">validation failed</span>` : '';
+          return `<li>
+            ${statusTag(e.status)}
+            <span class="tag tag-type">${e.eventType ?? '(none)'}</span>
             <span class="ts">${new Date(e.timestamp).toLocaleTimeString()}</span>
-            <br style="margin-bottom:0.25rem"/>
-            ${Object.entries(e.payload).map(([k,v]) => `<span style="color:#94a3b8">${k}:</span> <span style="color:#e2e8f0">${v}</span>`).join(' &nbsp;')}
-          </li>`).join('');
+            <div class="log-targets">${targets}</div>
+            <div class="log-payload">${payloadStr}</div>
+          </li>`;
+        }).join('');
       } catch {}
     }
 
-    fetchEvents();
-    setInterval(fetchEvents, 2000);
+    fetchLog();
+    setInterval(fetchLog, 3000);
   </script>
 </body>
 </html>

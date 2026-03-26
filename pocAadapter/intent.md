@@ -345,6 +345,45 @@ curl -X POST http://localhost:3000/event \
 
 ---
 
+---
+
+## 📋 Inbound Call Logging (Added)
+
+Every `POST /event` call is now logged regardless of outcome, and displayed live in the browser UI.
+
+### Log Entry Shape
+
+| Field | Description |
+|---|---|
+| `timestamp` | Unix ms when the call arrived |
+| `eventType` | Value from the request body (`null` if validation failed) |
+| `payload` | Parsed payload (`null` if rejected) |
+| `status` | `routed` / `dropped` / `rejected` |
+| `targets` | Resolved downstream systems (`[]` if dropped/rejected) |
+| `validationError` | Zod error detail (only present on `rejected`) |
+
+### Status Meanings
+
+- **`routed`** — event matched a routing rule and was published to the event bus
+- **`dropped`** — event was valid but had no matching routing targets (DLQ candidate)
+- **`rejected`** — request failed Zod validation before reaching the core
+
+### New Endpoint
+
+```
+GET /log   → returns all LogEntry[] in insertion order
+```
+
+### Architecture Note
+
+Logging lives in the **inbound layer** (`inboundController.ts`), not the core. The core returns a `RoutingOutcome` (`{ status, targets }`) so the inbound layer can record the full call context without the core knowing anything about the log store.
+
+### Browser UI
+
+The **Inbound Call Log** panel in the browser UI (`GET /`) shows all calls in reverse-chronological order with colour-coded status badges (green = routed, amber = dropped, red = rejected) and resolved targets.
+
+---
+
 ## 🔥 What You Just Got
 
 This is **exactly what you asked for**:
