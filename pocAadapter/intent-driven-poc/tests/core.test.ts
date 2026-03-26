@@ -1,8 +1,9 @@
 import { processEvent } from "../src/core/coreService";
-import { eventStore } from "../src/persistence/inMemoryStore";
+import { eventStore, droppedStore } from "../src/persistence/inMemoryStore";
 
 beforeEach(() => {
-  eventStore.length = 0; // reset store between tests
+  eventStore.length = 0;
+  droppedStore.length = 0;
 });
 
 test("processEvent stores the event in the event store", () => {
@@ -11,11 +12,12 @@ test("processEvent stores the event in the event store", () => {
   expect(eventStore[0].eventType).toBe("ProductOrderCreate");
 });
 
-test("processEvent does not crash for unknown eventType (no targets)", () => {
+test("processEvent routes unknown eventType to droppedStore, not eventStore", () => {
   expect(() =>
     processEvent({ eventType: "UnknownEvent", payload: {}, timestamp: Date.now() })
   ).not.toThrow();
-  expect(eventStore).toHaveLength(1);
+  expect(eventStore).toHaveLength(0);
+  expect(droppedStore).toHaveLength(1);
 });
 
 test("processEvent stores multiple events in order", () => {
