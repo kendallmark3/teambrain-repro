@@ -1,5 +1,5 @@
 {
-  "name": "loreal-intent-selector",
+  "name": "intent-selector",
   "version": "1.0.0",
   "private": true,
   "scripts": {

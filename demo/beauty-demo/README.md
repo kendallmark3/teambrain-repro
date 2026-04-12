@@ -4,7 +4,7 @@
 
 1. Open terminal in this folder
 2. Navigate to frontend:
-   cd frontend/loreal-demo
+   cd frontend/beauty-demo
 
 3. Install dependencies:
    npm install
